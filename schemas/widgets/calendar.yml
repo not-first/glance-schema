@@ -1,3 +1,5 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#calendar
+
 properties:
   first-day-of-week:
     enum:

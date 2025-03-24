@@ -1,16 +1,25 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#changedetectionio
+
 properties:
-  type:
-    enum:
-      - change-detection
   instance-url:
     type: string
+    format: uri
+    description: The URL pointing to your instance of changedetection.io.
+
   token:
     type: string
+    description: The API access token which can be found in SETTINGS > API. Optionally, you can specify this using an environment variable with the syntax ${VARIABLE_NAME}.
+
   limit:
     type: integer
+    description: The maximum number of watches to show.
+
   collapse-after:
     type: integer
+    description: How many watches are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
+
   watches:
     type: array
+    description: By default all of the configured watches will be shown. Optionally, you can specify a list of UUIDs for the specific watches you want to have listed
     items:
       type: string
