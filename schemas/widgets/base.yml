@@ -1,16 +1,25 @@
 type: object
+required:
+  - type
 properties:
   type:
     enum:
       # content will be script generated
+    description: Used to specify the widget.
+
   title:
     type: string
+    description: The title of the widget. If left blank it will be defined by the widget.
+
   title-url:
     type: string
+    description: The URL to go to when clicking on the widget's title. If left blank it will be defined by the widget (if available).
+
   cache:
     type: string
     pattern: ^\d+[smhd]$
+    description: How long to keep the fetched data in memory.
+
   css-class:
     type: string
-required:
-  - type
+    description: Set custom CSS classes for the specific widget instance.
