@@ -1,0 +1,19 @@
+properties:
+  type:
+    enum:
+      - hacker-news
+  limit:
+    type: integer
+  collapse-after:
+    type: integer
+  comments-url-template:
+    type: string
+    pattern: .*\{POST-ID\}.*
+  sort-by:
+    enum:
+      - top
+      - new
+      - best
+  extra-sort-by:
+    enum:
+      - engagement

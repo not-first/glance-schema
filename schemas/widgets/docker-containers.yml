@@ -1,0 +1,8 @@
+properties:
+  type:
+    enum:
+      - docker-containers
+  hide-by-default:
+    type: boolean
+  sock-path:
+    type: string

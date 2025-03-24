@@ -1,0 +1,23 @@
+branding:
+  type: object
+  additionalProperties: false
+  properties:
+    hide-footer:
+      type: boolean
+      description: Hides the footer when set to true.
+
+    custom-footer:
+      type: string
+      description: Specify custom HTML to use for the footer.
+
+    logo-text:
+      type: string
+      description: Specify custom text to use instead of the "G" found in the navigation.
+
+    logo-url:
+      type: string
+      description: Specify a URL to a custom image to use instead of the "G" found in the navigation. If both logo-text and logo-url are set, only logo-url will be used.
+
+    favicon-url:
+      type: string
+      description: Specify a URL to a custom image to use for the favicon.

@@ -1,0 +1,30 @@
+properties:
+  type:
+    enum:
+      - videos
+  channels:
+    type: array
+    items:
+      type: string
+  playlists:
+    type: array
+    items:
+      type: string
+  limit:
+    type: integer
+  style:
+    enum:
+      - horizontal-cards
+      - vertical-list
+      - grid-cards
+  collapse-after:
+    type: integer
+  collapse-after-rows:
+    type: integer
+  include-shorts:
+    type: boolean
+  video-url-template:
+    type: string
+    pattern: .*\{VIDEO-ID\}.*
+required:
+  - channels

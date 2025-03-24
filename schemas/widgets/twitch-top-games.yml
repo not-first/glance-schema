@@ -1,0 +1,13 @@
+properties:
+  type:
+    enum:
+      - twitch-top-games
+  exclude:
+    type: array
+    items:
+      type: string
+  limit:
+    type: integer
+  collapse-after:
+    type: integer
+required: []

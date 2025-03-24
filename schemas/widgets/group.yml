@@ -1,0 +1,20 @@
+properties:
+  type:
+    enum:
+      - group
+  define:
+    type: object
+    additionalProperties: true
+  widgets:
+    type: array
+    items:
+      allOf:
+        - $ref: "#/definitions/widget"
+        - not:
+            properties:
+              type:
+                enum:
+                  - group
+                  - split-column
+required:
+  - widgets

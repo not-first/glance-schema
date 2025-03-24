@@ -1,0 +1,20 @@
+properties:
+  type:
+    enum:
+      - lobsters
+  instance-url:
+    type: string
+  custom-url:
+    type: string
+  limit:
+    type: integer
+  collapse-after:
+    type: integer
+  sort-by:
+    enum:
+      - hot
+      - new
+  tags:
+    type: array
+    items:
+      type: string

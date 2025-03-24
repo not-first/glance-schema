@@ -1,0 +1,16 @@
+properties:
+  type:
+    enum:
+      - twitch-channels
+  channels:
+    type: array
+    items:
+      type: string
+  collapse-after:
+    type: integer
+  sort-by:
+    enum:
+      - viewers
+      - live
+required:
+  - channels

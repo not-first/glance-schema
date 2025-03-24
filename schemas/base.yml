@@ -1,0 +1,5 @@
+$schema: http://json-schema.org/draft-07/schema#
+type: object
+properties:
+  # content will be script generated
+additionalProperties: false

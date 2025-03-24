@@ -1,0 +1,7 @@
+document:
+  type: object
+  additionalProperties: false
+  properties:
+    head:
+      type: string
+      description: The HTML to be included in the head of the document.

@@ -1,0 +1,30 @@
+properties:
+  type:
+    enum:
+      - releases
+  repositories:
+    type: array
+    items:
+      oneOf:
+        - type: string
+        - type: object
+          properties:
+            repository:
+              type: string
+            include-prereleases:
+              type: boolean
+          additionalProperties: false
+          required:
+            - repository
+  show-source-icon:
+    type: boolean
+  token:
+    type: string
+  gitlab-token:
+    type: string
+  limit:
+    type: integer
+  collapse-after:
+    type: integer
+required:
+  - repositories

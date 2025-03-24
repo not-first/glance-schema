@@ -1,0 +1,20 @@
+properties:
+  type:
+    enum:
+      - weather
+  location:
+    type: string
+  units:
+    enum:
+      - metric
+      - imperial
+  hour-format:
+    enum:
+      - 12h
+      - 24h
+  hide-location:
+    type: boolean
+  show-area-name:
+    type: boolean
+required:
+  - location

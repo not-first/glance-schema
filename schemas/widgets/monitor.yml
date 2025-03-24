@@ -1,0 +1,38 @@
+properties:
+  type:
+    enum:
+      - monitor
+  show-failing-only:
+    type: boolean
+  style:
+    enum:
+      - compact
+  sites:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        check-url:
+          type: string
+        error-url:
+          type: string
+        icon:
+          type: string
+        allow-insecure:
+          type: boolean
+        same-tab:
+          type: boolean
+        alt-status-codes:
+          type: array
+          items:
+            type: integer
+      additionalProperties: false
+      required:
+        - title
+        - url
+required:
+  - sites

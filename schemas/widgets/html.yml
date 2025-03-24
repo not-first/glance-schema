@@ -1,0 +1,8 @@
+properties:
+  type:
+    enum:
+      - html
+  source:
+    type: string
+required:
+  - source

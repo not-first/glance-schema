@@ -1,0 +1,16 @@
+properties:
+  type:
+    enum:
+      - repository
+  repository:
+    type: string
+  token:
+    type: string
+  pull-requests-limit:
+    type: integer
+  issues-limit:
+    type: integer
+  commits-limit:
+    type: integer
+required:
+  - repository

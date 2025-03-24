@@ -1,0 +1,57 @@
+theme:
+  type: object
+  additionalProperties: false
+  properties:
+    light:
+      type: boolean
+      description: Whether the scheme is light or dark. This does not change the background color, it inverts the text colors so that they look appropriately on a light background.
+
+    background-color:
+      type: string
+      pattern: ^\d{1,3} \d{1,3} \d{1,3}$
+      description: Color of the page and widgets.
+      default: ""
+      examples:
+        - 240 8 9
+      errorMessage: Must be a valid HSL color in the format of "H S L".
+
+    primary-color:
+      type: string
+      pattern: ^\d{1,3} \d{1,3} \d{1,3}$
+      description: Color used across the page, largely to indicate unvisited links.
+      examples:
+        - 43 50 70
+      errorMessage: Must be a valid HSL color in the format of "H S L".
+
+    positive-color:
+      type: string
+      pattern: ^\d{1,3} \d{1,3} \d{1,3}$
+      description: Used to indicate that something is positive, such as stock price being up, twitch channel being live or a monitored site being online. If not set, the value of primary-color will be used.
+      examples:
+        - 43 50 70s
+      errorMessage: Must be a valid HSL color in the format of "H S L".
+
+    negative-color:
+      type: string
+      pattern: ^\d{1,3} \d{1,3} \d{1,3}$
+      description: Oppposite of positive-color.
+      examples:
+        - 0 70 70
+      errorMessage: Must be a valid HSL color in the format of "H S L".
+
+    contrast-multiplier:
+      type: number
+      description: Used to increase or decrease the contrast (in other words visibility) of the text. A value of 1.3 means that the text will be 30% lighter/darker depending on the scheme.
+
+    text-saturation-multiplier:
+      type: number
+      description: Used to increase or decrease the saturation of text, useful when using a custom background color with a high amount of saturation and needing the text to have a more neutral color. 0.5 means that the saturation will be 50% lower and 1.5 means that it'll be 50% higher.
+
+    custom-css-file:
+      type: string
+      pattern: ^.*\.css$
+      description: Path to a custom CSS file, either external or one from within the server configured assets path.
+      examples:
+        - /assets/my-style.css
+      errorMessage: Must be a file path to a CSS file ending in ".css".
+

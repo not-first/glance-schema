@@ -1,0 +1,48 @@
+properties:
+  type:
+    enum:
+      - rss
+  style:
+    enum:
+      - vertical-list
+      - detailed-list
+      - horizontal-cards
+      - horizontal-cards-2
+  feeds:
+    type: array
+    items:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        hide-categories:
+          type: boolean
+        hide-description:
+          type: boolean
+        limit:
+          type: integer
+        item-link-prefix:
+          type: string
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      required:
+        - url
+  thumbnail-height:
+    type: number
+  card-height:
+    type: number
+  limit:
+    type: integer
+  preserve-order:
+    type: boolean
+  single-line-titles:
+    type: boolean
+  collapse-after:
+    type: integer
+required:
+  - feeds

@@ -1,0 +1,32 @@
+properties:
+  type:
+    enum:
+      - markets
+  markets:
+    type: array
+    items:
+      type: object
+      properties:
+        symbol:
+          type: string
+        name:
+          type: string
+        symbol-link:
+          type: string
+        chart-link:
+          type: string
+      additionalProperties: false
+      required:
+        - symbol
+  sort-by:
+    enum:
+      - change
+      - absolute-change
+  chart-link-template:
+    type: string
+    pattern: .*\{SYMBOL\}.*
+  symbol-link-template:
+    type: string
+    pattern: .*\{SYMBOL\}.*
+required:
+  - markets

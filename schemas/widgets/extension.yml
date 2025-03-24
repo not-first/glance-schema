@@ -1,0 +1,17 @@
+properties:
+  type:
+    enum:
+      - extension
+  url:
+    type: string
+    format: uri
+  fallback-content-type:
+    enum:
+      - html
+  allow-potentially-dangerous-html:
+    type: boolean
+  parameters:
+    type: object
+    additionalProperties: true
+required:
+  - url

@@ -1,0 +1,49 @@
+properties:
+  type:
+    enum:
+      - server-stats
+  servers:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          enum:
+            - local
+            - remote
+        name:
+          type: string
+        hide-swap:
+          type: boolean
+        cpu-temp-sensor:
+          type: string
+        hide-mountpoints-by-default:
+          type: boolean
+        mountpoints:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              hide:
+                type: boolean
+        url:
+          type: string
+        token:
+          type: string
+        timeout:
+          type: string
+          pattern: ^\d+[smhd]$
+      additionalProperties: false
+      required:
+        - type
+      allOf:
+        - if:
+            properties:
+              type:
+                enum:
+                  - remote
+          then:
+            required:
+              - url

@@ -1,0 +1,55 @@
+properties:
+  type:
+    enum:
+      - dns-stats
+  service:
+    enum:
+      - adguard
+      - pihole
+      - pihole-v6
+  allow-insecure:
+    type: boolean
+  url:
+    type: string
+  username:
+    type: string
+  password:
+    type: string
+  token:
+    type: string
+  hide-graph:
+    type: boolean
+  hide-top-domains:
+    type: boolean
+  hour-format:
+    enum:
+      - 12h
+      - 24h
+required:
+  - url
+allOf:
+  - if:
+      properties:
+        service:
+          enum:
+            - adguard
+    then:
+      required:
+        - username
+        - password
+  - if:
+      properties:
+        service:
+          enum:
+            - pihole-v6
+    then:
+      required:
+        - password
+  - if:
+      properties:
+        service:
+          enum:
+            - pihole
+    then:
+      required:
+        - token

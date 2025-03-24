@@ -1,0 +1,16 @@
+properties:
+  type:
+    enum:
+      - change-detection
+  instance-url:
+    type: string
+  token:
+    type: string
+  limit:
+    type: integer
+  collapse-after:
+    type: integer
+  watches:
+    type: array
+    items:
+      type: string

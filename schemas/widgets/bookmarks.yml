@@ -1,0 +1,53 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#bookmarks
+
+properties:
+  groups:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        color:
+          type: string
+        links:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              url:
+                type: string
+              icon:
+                type: string
+              same-tab:
+                type: boolean
+              hide-arrow:
+                type: boolean
+              target:
+                type: string
+                enum:
+                  - _blank
+                  - _self
+                  - _parent
+                  - _top
+            required:
+              - title
+              - url
+        same-tab:
+          type: boolean
+        hide-arrow:
+          type: boolean
+        target:
+          type: string
+          enum:
+            - _blank
+            - _self
+            - _parent
+            - _top
+      additionalProperties: false
+      required:
+        - links
+required:
+  - groups

@@ -1,0 +1,17 @@
+properties:
+  type:
+    enum:
+      - custom-api
+  url:
+    type: string
+  headers:
+    type: object
+    additionalProperties:
+      type: string
+  frameless:
+    type: boolean
+  template:
+    type: string
+required:
+  - url
+  - template

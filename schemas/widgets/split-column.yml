@@ -1,0 +1,17 @@
+properties:
+  type:
+    enum:
+      - split-column
+  max-columns:
+    type: integer
+    minimum: 2
+  define:
+    type: object
+    additionalProperties: true
+  widgets:
+    type: array
+    items:
+      $ref: "#/definitions/widget"
+    minItems: 2
+required:
+  - widgets

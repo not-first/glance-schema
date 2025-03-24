@@ -1,0 +1,11 @@
+properties:
+  type:
+    enum:
+      - iframe
+  source:
+    type: string
+  height:
+    type: integer
+    minimum: 50
+required:
+  - source

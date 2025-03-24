@@ -1,0 +1,14 @@
+properties:
+  type:
+    enum:
+      - calendar
+  first-day-of-week:
+    enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+required: []

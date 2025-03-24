@@ -1,0 +1,20 @@
+properties:
+  type:
+    enum:
+      - clock
+  hour-format:
+    enum:
+      - 12h
+      - 24h
+  timezones:
+    type: array
+    items:
+      type: object
+      properties:
+        timezone:
+          type: string
+        label:
+          type: string
+      additionalProperties: false
+      required:
+        - timezone

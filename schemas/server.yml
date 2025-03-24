@@ -1,0 +1,23 @@
+server:
+  type: object
+  additionalProperties: false
+  properties:
+    host:
+      type: string
+      description: The address which the server will listen on. Setting it to localhost means that only the machine that the server is running on will be able to access the dashboard. By default it will listen on all interfaces.
+
+    port:
+      type: integer
+      description: The port which the server will listen on. By default it will listen on port 8000.
+      minimum: 1
+      maximum: 65535
+
+    base-url:
+      type: string
+      description: The base URL that Glance is hosted under. No need to specify this unless you're using a reverse proxy and are hosting Glance under a directory. If that's the case then you can set this value to /glance or whatever the directory is called. Note that the forward slash (/) in the beginning is required unless you specify the full domain and path
+
+    assets-path:
+      type: string
+      description: The path to a directory that will be served by the server under the /assets/ path.
+      examples:
+        - /app/assets

@@ -1,0 +1,16 @@
+type: object
+properties:
+  type:
+    enum:
+      # content will be script generated
+  title:
+    type: string
+  title-url:
+    type: string
+  cache:
+    type: string
+    pattern: ^\d+[smhd]$
+  css-class:
+    type: string
+required:
+  - type

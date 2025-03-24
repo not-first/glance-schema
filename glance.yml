@@ -1,0 +1,96 @@
+# yaml-language-server: $schema=file:///Users/ohenry/Documents/Dev/glance-schema/schema.json
+
+branding:
+  hide-footer: true
+
+theme:
+  background-color: 232 23 18
+  contrast-multiplier: 1.2
+  primary-color: 220 83 75
+  positive-color: 105 48 72
+  negative-color: 351 74 73
+
+
+server:
+  assets-path: /app/assets
+
+pages:
+  - name: Homelab
+    center-vertically: true
+    hide-desktop-navigation: true
+    columns:
+      - size: small
+
+        widgets:
+          - type: clock
+            title-url: testing
+            hour-format: 12h
+
+          - type: extension
+            title: Docker Backups
+            url: http://restic-extension:8675/docker
+            allow-potentially-dangerous-html: true
+            cache: 1s
+            parameters:
+              autorestic-icon: true
+              limit: 3
+              hide-file-count: true
+
+          - type: extension
+            title: NCALF Backups
+            url: http://restic-extension:8675/ncalf
+            allow-potentially-dangerous-html: true
+            cache: 1s
+            parameters:
+              autorestic-icon: true
+
+          - type: extension
+            url: http://tailscale-extension:8677
+            allow-potentially-dangerous-html: true
+            cache: 1s
+
+      - size: full
+        widgets:
+          - type: search
+            search-engine: google
+
+          - type: docker-containers
+            hide-by-default: true
+
+          - type: reddit
+            subreddit: selfhosted
+
+      - size: small
+        widgets:
+          - type: server-stats
+            servers:
+              - type: local
+                name: Thinkcentre M900
+
+          - type: dns-stats
+            service: adguard
+            url: http://adguard.home
+            username: admin
+            password: ${ADGUARD_PASSWORD}
+            hide-top-domains: true
+
+          - type: releases
+            show-source-icon: true
+            token: ${GITHUB_TOKEN}
+            limit: 2
+            repositories:
+              - immich-app/immich
+              - adguardteam/adguardhome
+              - amir20/dozzle
+              - redimp/otterwiki
+              - glanceapp/glance
+              - louislam/uptime-kuma
+              - mag37/dockcheck
+              - itzg/docker-minecraft-server
+              - nginxproxymanager/nginx-proxy-manager
+
+          - type: extension
+            title: Uptime Kuma
+            url: http://uptime-kuma-extension:8676/ncalf
+            allow-potentially-dangerous-html: true
+            cache: 1s

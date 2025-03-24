@@ -1,0 +1,33 @@
+properties:
+  type:
+    enum:
+      - search
+  search-engine:
+    oneOf:
+      - enum:
+          - duckduckgo
+          - google
+      - type: string
+        pattern: .*\{QUERY\}.*
+  new-tab:
+    type: boolean
+  autofocus:
+    type: boolean
+  placeholder:
+    type: string
+  bangs:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        shortcut:
+          type: string
+        url:
+          type: string
+          pattern: .*\{QUERY\}.*
+      additionalProperties: false
+      required:
+        - shortcut
+        - url
