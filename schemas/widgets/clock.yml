@@ -1,20 +1,25 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#clock
+
 properties:
-  type:
-    enum:
-      - clock
   hour-format:
     enum:
       - 12h
       - 24h
+    description: Whether to show the time in 12 or 24 hour format.
+
   timezones:
     type: array
+
     items:
       type: object
+      required:
+        - timezone
+      additionalProperties: false
       properties:
         timezone:
           type: string
+          description: "A timezone identifier such as Europe/London, America/New_York, etc. The full list of available identifiers can be found here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones."
+
         label:
           type: string
-      additionalProperties: false
-      required:
-        - timezone
+          description: Optionally, override the display value for the timezone to something more meaningful such as "Home", "Work" or anything else.
