@@ -1,17 +1,26 @@
-properties:
-  type:
-    enum:
-      - custom-api
-  url:
-    type: string
-  headers:
-    type: object
-    additionalProperties:
-      type: string
-  frameless:
-    type: boolean
-  template:
-    type: string
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#custom-api
+
 required:
   - url
   - template
+properties:
+  url:
+    type: string
+    format: uri
+    description: The URL to fetch the data from. It must be accessible from the server that Glance is running on.
+
+  headers:
+    type: object
+    description: Optionally specify headers that will be sent with the request. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#headers-1
+
+    additionalProperties:
+      type: string
+
+  frameless:
+    type: boolean
+    description: When set to true, removes the border and padding around the widget.
+
+  template:
+    type: string
+    description: The template that will be used to display the data. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#template
+
