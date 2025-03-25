@@ -1,13 +1,17 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#twitch-top-games
+
 properties:
-  type:
-    enum:
-      - twitch-top-games
   exclude:
     type: array
     items:
       type: string
+    description: A list of categories that will never be shown. You must provide the slug found by clicking on the category and looking at the URL.
+
   limit:
     type: integer
+    description: The maximum number of games to show.
+
   collapse-after:
     type: integer
-required: []
+    description: How many games are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
+
