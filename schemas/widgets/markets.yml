@@ -1,32 +1,51 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#markets
+
+required:
+  - markets
 properties:
-  type:
-    enum:
-      - markets
   markets:
     type: array
+    description: An array of markets for which to display information about.
+
     items:
       type: object
-      properties:
-        symbol:
-          type: string
-        name:
-          type: string
-        symbol-link:
-          type: string
-        chart-link:
-          type: string
       additionalProperties: false
       required:
         - symbol
+
+      properties:
+        symbol:
+          type: string
+          description: The symbol, as seen in Yahoo Finance.
+
+        name:
+          type: string
+          description: The name that will be displayed under the symbol.
+
+        symbol-link:
+          type: string
+          description: The link to go to when clicking on the symbol.
+
+        chart-link:
+          type: string
+          description: The link to go to when clicking on the chart.
+
   sort-by:
     enum:
       - change
       - absolute-change
+    description: By default the markets are displayed in the order they were defined. You can customize their ordering by setting the sort-by property to change for descending order based on the stock's percentage change (e.g. 1% would be sorted higher than -1%) or absolute-change for descending order based on the stock's absolute price change (e.g. -1% would be sorted higher than +0.5%).
+
   chart-link-template:
     type: string
     pattern: .*\{SYMBOL\}.*
+    description: A template for the link to go to when clicking on the chart that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a chart-link property.
+    examples:
+      - https://www.tradingview.com/chart/?symbol={SYMBOL}
+
   symbol-link-template:
     type: string
     pattern: .*\{SYMBOL\}.*
-required:
-  - markets
+    description: A template for the link to go to when clicking on the symbol that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a symbol-link property.
+    examples:
+      - https://www.google.com/search?tbm=nws&q={SYMBOL}

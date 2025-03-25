@@ -6,6 +6,7 @@ properties:
     description: The base URL for a lobsters instance hosted somewhere other than on lobste.rs.
     examples:
       - https://www.journalduhacker.net/
+
   custom-url:
     type: string
     description: A custom URL to retrieve lobsters posts from. If this is specified, the instance-url, sort-by and tags properties are ignored.
