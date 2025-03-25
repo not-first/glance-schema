@@ -1,30 +1,47 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#videos
+
+required:
+  - channels
 properties:
-  type:
-    enum:
-      - videos
   channels:
     type: array
+    description: A list of channels IDs. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#channels for how to get a channel ID.
     items:
       type: string
+
   playlists:
     type: array
+    description: https://github.com/glanceapp/glance/blob/main/docs/configuration.md#channels
     items:
       type: string
+
   limit:
     type: integer
+    description: The maximum number of videos to show.
+
   style:
     enum:
       - horizontal-cards
       - vertical-list
       - grid-cards
+    description: Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-1 for widgets.
+
   collapse-after:
     type: integer
+    description: Specify the number of videos to show when using the vertical-list style before the "SHOW MORE" button appears.
+
   collapse-after-rows:
     type: integer
+    description: Specify the number of rows to show when using the grid-cards style before the "SHOW MORE" button appears.
+
   include-shorts:
     type: boolean
+    description: Whether to include YouTube Shorts videos in the widget.
+
   video-url-template:
     type: string
     pattern: .*\{VIDEO-ID\}.*
-required:
-  - channels
+    description: Used to replace the default link for videos. Useful when you're running your own YouTube front-end.
+    examples:
+      - https://invidious.your-domain.com/watch?v={VIDEO-ID}
+    errorMessage: Must be a valid video url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#video-url-template
