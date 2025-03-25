@@ -3,9 +3,11 @@
 properties:
   limit:
     type: integer
+    description: The maximum number of posts to show.
 
   collapse-after:
     type: integer
+    description: How many posts are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
 
   comments-url-template:
     type: string

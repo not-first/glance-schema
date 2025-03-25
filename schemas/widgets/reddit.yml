@@ -12,7 +12,7 @@ properties:
       - vertical-list
       - horizontal-cards
       - vertical-cards
-    description: Used to change the appearance of the widget.
+    description: Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-2 for examples.
 
   show-thumbnails:
     type: boolean
@@ -33,7 +33,7 @@ properties:
   comments-url-template:
     type: string
     pattern: .*(?:\{POST-PATH\}|\{POST-ID\}|\{SUBREDDIT\}).*
-    description: Used to replace the default link for post comments. Useful if you want to use the old Reddit design or any other 3rd party front-end. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template-1
+    description: Used to replace the default link for post comments. Useful if you want to use the old Reddit design or any other 3rd party front-end.
     examples:
       - https://old.reddit.com/{POST-PATH}
     errorMessage: Must be a valid comments url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template-1
@@ -54,10 +54,13 @@ properties:
     oneOf:
       - type: string
       - type: object
-        additionalProperties: false
+
         properties:
           url:
             type: string
+            description: A custom HTTP/HTTPS proxy URL that will be used to fetch the data. This is useful when you're hosting Glance on a VPS where Reddit is blocking the requests and you want to bypass the restriction by routing the requests through a proxy.
+            examples:
+              - http://user:pass@proxy.com:8080
 
           allow-insecure:
             type: boolean
@@ -66,7 +69,7 @@ properties:
           timeout:
             type: string
             pattern: ^\d+[smhd]$
-            description: "The maximum time to wait for a response from the proxy. The value is a string and must be a number followed by one of s, m, h, d."
+            description: The maximum time to wait for a response from the proxy. The value is a string and must be a number followed by one of s, m, h, d.
             examples:
               - 10s
             errorMessage: Must be a valid time duration.

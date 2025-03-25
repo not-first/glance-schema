@@ -5,4 +5,5 @@ required:
 properties:
   source:
     type: string
+    description: The HTML source code to render. Javascript should be included in the document head.
 

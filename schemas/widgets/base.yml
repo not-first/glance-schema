@@ -18,7 +18,9 @@ properties:
   cache:
     type: string
     pattern: ^\d+[smhd]$
-    description: How long to keep the fetched data in memory.
+    description: How long to keep the fetched data in memory. The value is a string and must be a number followed by one of s, m, h, d.
+    examples:
+      - 1h
     errorMessage: Must be a valid time duration.
 
   css-class:

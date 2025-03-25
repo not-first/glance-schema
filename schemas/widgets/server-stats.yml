@@ -7,7 +7,7 @@ properties:
 
     items:
       type: object
-      additionalProperties: false
+
       required:
         - type
       properties:
@@ -59,4 +59,6 @@ properties:
           type: string
           pattern: ^\d+[smhd]$
           description: The maximum time to wait for a response from the server. The value is a string and must be a number followed by one of s, m, h, d.
+          examples:
+            - 10s
           errorMessage: Must be a valid time duration.

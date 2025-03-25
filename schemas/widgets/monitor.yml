@@ -10,13 +10,13 @@ properties:
   style:
     enum:
       - compact
-    description: Used to change the appearance of the widget.
+    description: Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-3 for examples.
 
   sites:
     type: array
     items:
       type: object
-      additionalProperties: false
+
       required:
         - title
         - url

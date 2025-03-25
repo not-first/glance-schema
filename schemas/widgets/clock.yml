@@ -14,7 +14,7 @@ properties:
       type: object
       required:
         - timezone
-      additionalProperties: false
+
       properties:
         timezone:
           type: string

@@ -27,7 +27,6 @@ properties:
     description: A list of bangs to use with the search engine. See https://duckduckgo.com/bangs
     items:
       type: object
-      additionalProperties: false
       required:
         - shortcut
         - url

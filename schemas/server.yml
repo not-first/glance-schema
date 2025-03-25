@@ -1,6 +1,6 @@
 server:
   type: object
-  additionalProperties: false
+
   properties:
     host:
       type: string

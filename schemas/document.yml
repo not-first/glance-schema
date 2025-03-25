@@ -1,6 +1,5 @@
 document:
   type: object
-  additionalProperties: false
   properties:
     head:
       type: string

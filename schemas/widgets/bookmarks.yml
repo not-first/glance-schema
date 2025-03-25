@@ -9,17 +9,19 @@ properties:
 
     items:
       type: object
-      additionalProperties: false
+
       required:
         - links
       properties:
         title:
           type: string
+          description: The title of the group.
 
         color:
           type: string
           pattern: ^\d{1,3} \d{1,3} \d{1,3}$
           errorMessage: Must be a valid HSL color in the format of "H S L".
+          description: The colour of the title and the arrow of the group. The value should be a valid HSL color in the format of "H S L".
 
         same-tab:
           type: boolean
@@ -49,9 +51,11 @@ properties:
             properties:
               title:
                 type: string
+                description: The title of the link.
 
               url:
                 type: string
+                description: The URL of the link.
 
               icon:
                 type: string

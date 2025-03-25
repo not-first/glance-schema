@@ -1,14 +1,12 @@
 pages:
-
   type: array
   required:
     - name
     - columns
-  additionalProperties: false
 
   items:
     type: object
-    additionalProperties: false
+
     properties:
       name:
         type: string
@@ -42,10 +40,11 @@ pages:
 
       columns:
         type: array
+        description: A list of columns to display on the page.
 
         items:
           type: object
-          additionalProperties: false
+
           required:
           - size
           properties:

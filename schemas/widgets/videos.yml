@@ -24,7 +24,7 @@ properties:
       - horizontal-cards
       - vertical-list
       - grid-cards
-    description: Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-1 for widgets.
+    description: Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-1 for examples.
 
   collapse-after:
     type: integer

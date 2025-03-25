@@ -1,6 +1,5 @@
 branding:
   type: object
-  additionalProperties: false
   properties:
     hide-footer:
       type: boolean
