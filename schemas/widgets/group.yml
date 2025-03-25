@@ -6,7 +6,7 @@ properties:
   define:
     type: object
     additionalProperties: true
-    description: https://github.com/glanceapp/glance/blob/main/docs/configuration.md#sharing-properties
+    description: See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#sharing-properties
 
   widgets:
     type: array

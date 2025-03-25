@@ -1,8 +1,8 @@
-properties:
-  type:
-    enum:
-      - html
-  source:
-    type: string
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#html
+
 required:
   - source
+properties:
+  source:
+    type: string
+
