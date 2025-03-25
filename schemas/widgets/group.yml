@@ -1,12 +1,16 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#group
+
+required:
+  - widgets
 properties:
-  type:
-    enum:
-      - group
   define:
     type: object
     additionalProperties: true
+    description: https://github.com/glanceapp/glance/blob/main/docs/configuration.md#sharing-properties
+
   widgets:
     type: array
+    description: A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.
     items:
       allOf:
         - $ref: "#/definitions/widget"
@@ -16,5 +20,4 @@ properties:
                 enum:
                   - group
                   - split-column
-required:
-  - widgets
+
