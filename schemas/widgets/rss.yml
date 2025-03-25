@@ -1,48 +1,72 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#rss
+
+required:
+  - feeds
 properties:
-  type:
-    enum:
-      - rss
   style:
     enum:
       - vertical-list
       - detailed-list
       - horizontal-cards
       - horizontal-cards-2
+    description: Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style for examples.
+
   feeds:
     type: array
+    description: An array of RSS/atom feeds. The title can optionally be changed.
+
     items:
       type: object
-      properties:
-        url:
-          type: string
-        title:
-          type: string
-        hide-categories:
-          type: boolean
-        hide-description:
-          type: boolean
-        limit:
-          type: integer
-        item-link-prefix:
-          type: string
-        headers:
-          type: object
-          additionalProperties:
-            type: string
       additionalProperties: false
       required:
         - url
+      properties:
+        url:
+          type: string
+
+        title:
+          type: string
+
+        hide-categories:
+          type: boolean
+
+        hide-description:
+          type: boolean
+
+        limit:
+          type: integer
+          description: The maximum number of articles to show from that specific feed. Useful if you have a feed which posts a lot of articles frequently and you want to prevent it from excessively pushing down articles from other feeds.
+
+        item-link-prefix:
+          type: string
+          description: If an RSS feed isn't returning item links with a base domain and Glance has failed to automatically detect the correct domain you can manually add a prefix to each link with this property.
+
+        headers:
+          type: object
+          description: Optionally specify the headers that will be sent with the request.
+          additionalProperties:
+            type: string
+
   thumbnail-height:
     type: number
+    description: Used to modify the height of the thumbnails. Works only when the style is set to horizontal-cards. The default value is 10 and the units are rem, if you want to for example double the height of the thumbnails you can set it to 20.
+
   card-height:
     type: number
+    description: Used to modify the height of cards when using the horizontal-cards-2 style. The default value is 27 and the units are rem.
+
   limit:
     type: integer
+    description: The maximum number of articles to show.
+
   preserve-order:
     type: boolean
+    description: When set to true, the order of the articles will be preserved as they are in the feeds. Useful if a feed uses its own sorting order which denotes the importance of the articles. If you use this property while having a lot of feeds, it's recommended to set a limit to each individual feed since if the first defined feed has 15 articles, the articles from the second feed will start after the 15th article in the list.
+
   single-line-titles:
     type: boolean
+    description: When set to true, truncates the title of each post if it exceeds one line. Only applies when the style is set to vertical-list.
+
   collapse-after:
     type: integer
-required:
-  - feeds
+    description: How many articles are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
