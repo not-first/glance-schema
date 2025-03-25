@@ -1,49 +1,62 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#server-stats
+
 properties:
-  type:
-    enum:
-      - server-stats
   servers:
     type: array
+    description: If not provided it will display the statistics of the server Glance is running on.
+
     items:
       type: object
+      additionalProperties: false
+      required:
+        - type
       properties:
         type:
           enum:
             - local
             - remote
+          description: Whether to display statistics for the local server or a remote server.
+
         name:
           type: string
+          description: The name of the server which will be displayed on the widget. If not provided it will default to the server's hostname.
+
         hide-swap:
           type: boolean
+          description: Whether to hide the swap usage.
+
         cpu-temp-sensor:
           type: string
+          description: The name of the sensor to use for the CPU temperature. When not provided the widget will attempt to find the correct one, if it fails to do so the temperature will not be displayed. To view the available sensors you can use sensors command
+
         hide-mountpoints-by-default:
           type: boolean
+          description: "If set to true you'll have to manually make each mountpoint visible by adding a hide: false property."
+
         mountpoints:
           type: object
+          description: A map of mountpoints to display disk usage for. The key is the path to the mountpoint and the value is an object with optional properties.
           additionalProperties:
             type: object
             properties:
               name:
                 type: string
+                description: The name of the mountpoint which will be displayed on the widget. If not provided it will default to the mountpoint's path.
+
               hide:
                 type: boolean
+                description: Whether to hide this mountpoint from the widget.
+
         url:
           type: string
+          description: The URL and port of the server to fetch the statistics from.
+
         token:
           type: string
+          description: The authentication token to use when fetching the statistics.
+
         timeout:
           type: string
           pattern: ^\d+[smhd]$
-      additionalProperties: false
-      required:
-        - type
-      allOf:
-        - if:
-            properties:
-              type:
-                enum:
-                  - remote
-          then:
-            required:
-              - url
+          description: The maximum time to wait for a response from the server. The value is a string and must be a number followed by one of s, m, h, d.
+          errorMessage: Must be a valid time duration.
