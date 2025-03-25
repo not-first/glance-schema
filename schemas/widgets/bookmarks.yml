@@ -52,7 +52,6 @@ properties:
 
               url:
                 type: string
-                format: uri
 
               icon:
                 type: string

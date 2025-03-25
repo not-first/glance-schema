@@ -3,7 +3,6 @@
 properties:
   instance-url:
     type: string
-    format: uri
     description: The URL pointing to your instance of changedetection.io.
 
   token:

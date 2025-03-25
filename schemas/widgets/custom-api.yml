@@ -6,7 +6,6 @@ required:
 properties:
   url:
     type: string
-    format: uri
     description: The URL to fetch the data from. It must be accessible from the server that Glance is running on.
 
   headers:

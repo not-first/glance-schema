@@ -4,7 +4,6 @@ properties:
       - extension
   url:
     type: string
-    format: uri
   fallback-content-type:
     enum:
       - html
