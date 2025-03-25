@@ -10,7 +10,9 @@ properties:
   comments-url-template:
     type: string
     pattern: .*\{POST-ID\}.*
-    description: Used to replace the default link for post comments. Useful if you want to use an alternative front-end. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template
+    description: Used to replace the default link for post comments. Useful if you want to use an alternative front-end.
+    examples:
+      - https://www.hckrnws.com/stories/{POST-ID}
     errorMessage: Must be a valid comments url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template
 
   sort-by:

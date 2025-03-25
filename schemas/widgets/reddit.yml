@@ -1,7 +1,7 @@
+
+required:
+  - subreddit
 properties:
-  type:
-    enum:
-      - reddit
   subreddit:
     type: string
   style:
@@ -55,5 +55,4 @@ properties:
   extra-sort-by:
     enum:
       - engagement
-required:
-  - subreddit
+

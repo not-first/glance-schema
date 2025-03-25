@@ -42,6 +42,7 @@ properties:
     description: A template for the link to go to when clicking on the chart that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a chart-link property.
     examples:
       - https://www.tradingview.com/chart/?symbol={SYMBOL}
+    errorMessage: Must be a valid chart link template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#chart-link-template
 
   symbol-link-template:
     type: string
@@ -49,3 +50,4 @@ properties:
     description: A template for the link to go to when clicking on the symbol that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a symbol-link property.
     examples:
       - https://www.google.com/search?tbm=nws&q={SYMBOL}
+    errorMessage: Must be a valid symbol link template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#symbol-link-template

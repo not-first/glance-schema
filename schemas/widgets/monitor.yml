@@ -1,38 +1,57 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#monitor
+
+required:
+  - sites
 properties:
-  type:
-    enum:
-      - monitor
   show-failing-only:
     type: boolean
+    description: Shows only a list of failing sites when set to true.
+
   style:
     enum:
       - compact
+    description: Used to change the appearance of the widget.
+
   sites:
     type: array
     items:
       type: object
-      properties:
-        title:
-          type: string
-        url:
-          type: string
-        check-url:
-          type: string
-        error-url:
-          type: string
-        icon:
-          type: string
-        allow-insecure:
-          type: boolean
-        same-tab:
-          type: boolean
-        alt-status-codes:
-          type: array
-          items:
-            type: integer
       additionalProperties: false
       required:
         - title
         - url
-required:
-  - sites
+
+      properties:
+        title:
+          type: string
+          description: The title used to indicate the site.
+
+        url:
+          type: string
+          description: The public facing URL of a monitored service, the user will be redirected here. If check-url is not specified, this is used as the status check.
+
+        check-url:
+          type: string
+          description: The URL which will be requested and its response will determine the status of the site. If not specified, the url property is used.
+
+        error-url:
+          type: string
+          description: If the monitored service returns an error, the user will be redirected here. If not specified, the url property is used.
+
+        icon:
+          type: string
+          description: "Optional URL to an image which will be used as the icon for the site. Can be an external URL or internal via server configured assets. You can also directly use Simple Icons via a si: prefix or Dashboard Icons via a di: prefix:"
+
+        allow-insecure:
+          type: boolean
+          description: Whether to ignore invalid/self-signed certificates.
+
+        same-tab:
+          type: boolean
+          description: Whether to open the link in the same or a new tab.
+
+        alt-status-codes:
+          type: array
+          description: Status codes other than 200 that you want to return "OK".
+          items:
+            type: integer
