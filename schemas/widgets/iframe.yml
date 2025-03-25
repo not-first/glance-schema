@@ -1,11 +1,13 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#iframe
+
+required:
+  - source
 properties:
-  type:
-    enum:
-      - iframe
   source:
     type: string
+    description: The source of the iframe.
+
   height:
     type: integer
     minimum: 50
-required:
-  - source
+    description: The height of the iframe.
