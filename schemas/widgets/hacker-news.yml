@@ -1,19 +1,26 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#hacker-news
+
 properties:
-  type:
-    enum:
-      - hacker-news
   limit:
     type: integer
+
   collapse-after:
     type: integer
+
   comments-url-template:
     type: string
     pattern: .*\{POST-ID\}.*
+    description: Used to replace the default link for post comments. Useful if you want to use an alternative front-end. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template
+    errorMessage: Must be a valid comments url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template
+
   sort-by:
     enum:
       - top
       - new
       - best
+    description: Used to specify the order in which the posts should get returned.
+
   extra-sort-by:
     enum:
       - engagement
+    description: Can be used to specify an additional sort which will be applied on top of the already sorted posts.
