@@ -1,16 +1,20 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#twitch-channels
+
+required:
+  - channels
 properties:
-  type:
-    enum:
-      - twitch-channels
   channels:
     type: array
+    description: A list of channels to display.
     items:
       type: string
+
   collapse-after:
     type: integer
+    description: How many channels are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
+
   sort-by:
     enum:
       - viewers
       - live
-required:
-  - channels
+    description: Can be used to specify the order in which the channels are displayed.
