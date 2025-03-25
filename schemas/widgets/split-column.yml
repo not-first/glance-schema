@@ -1,17 +1,16 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#split-column
+
+required:
+  - widgets
 properties:
-  type:
-    enum:
-      - split-column
   max-columns:
     type: integer
     minimum: 2
-  define:
-    type: object
-    additionalProperties: true
+    description: The maximum number of columns to split the widgets into.
+
   widgets:
     type: array
+    minItems: 2
+    description: A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.
     items:
       $ref: "#/definitions/widget"
-    minItems: 2
-required:
-  - widgets
