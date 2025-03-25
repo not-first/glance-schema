@@ -3,9 +3,6 @@
 required:
   - url
 properties:
-  type:
-    enum:
-      - extension
   url:
     type: string
     description: The URL of the extension. Note that the query gets stripped from this URL and the one defined by parameters gets used instead.
