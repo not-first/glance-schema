@@ -19,6 +19,7 @@ properties:
     type: string
     pattern: ^\d+[smhd]$
     description: How long to keep the fetched data in memory.
+    errorMessage: Must be a valid time duration.
 
   css-class:
     type: string

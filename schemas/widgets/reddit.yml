@@ -1,47 +1,86 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#reddit
 
 required:
   - subreddit
 properties:
   subreddit:
     type: string
+    description: The subreddit for which to fetch the posts from.
+
   style:
     enum:
       - vertical-list
       - horizontal-cards
       - vertical-cards
+    description: Used to change the appearance of the widget.
+
   show-thumbnails:
     type: boolean
+    description: Shows or hides thumbnails next to the post. This only works if the style is vertical-list.
+
   show-flairs:
     type: boolean
+    description: Shows post flairs when set to true.
+
   limit:
     type: integer
+    description: The maximum number of posts to show.
+
   collapse-after:
     type: integer
+    description: How many posts are visible before the "SHOW MORE" button appears. Set to -1 to never collapse. Not available when using the vertical-cards and horizontal-cards styles.
+
   comments-url-template:
     type: string
     pattern: .*(?:\{POST-PATH\}|\{POST-ID\}|\{SUBREDDIT\}).*
+    description: Used to replace the default link for post comments. Useful if you want to use the old Reddit design or any other 3rd party front-end. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template-1
+    examples:
+      - https://old.reddit.com/{POST-PATH}
+    errorMessage: Must be a valid comments url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template-1
+
   request-url-template:
     type: string
     pattern: .*\{REQUEST-URL\}.*
+    description: A custom request URL that will be used to fetch the data. This is useful when you're hosting Glance on a VPS where Reddit is blocking the requests and you want to route them through a proxy that accepts the URL as either a part of the path or a query parameter.
+    examples:
+      - https://proxy/{REQUEST-URL}
+      - https://your.proxy/?url={REQUEST-URL}
+    errorMessage: Must be a valid request url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#request-url-template
+
   proxy:
+    description: A custom HTTP/HTTPS proxy URL that will be used to fetch the data. This is useful when you're hosting Glance on a VPS where Reddit is blocking the requests and you want to bypass the restriction by routing the requests through a proxy.
+    examples:
+      - http://user:pass@proxy.com:8080
     oneOf:
       - type: string
       - type: object
+        additionalProperties: false
         properties:
           url:
             type: string
+
           allow-insecure:
             type: boolean
+            description: When set to true, allows the use of insecure connections such as when the proxy has a self-signed certificate.
+
           timeout:
             type: string
             pattern: ^\d+[smhd]$
-        additionalProperties: false
+            description: "The maximum time to wait for a response from the proxy. The value is a string and must be a number followed by one of s, m, h, d."
+            examples:
+              - 10s
+            errorMessage: Must be a valid time duration.
+
+
+
   sort-by:
     enum:
       - hot
       - new
       - top
       - rising
+    description: Can be used to specify the order in which the posts should get returned.
+
   top-period:
     enum:
       - hour
@@ -50,9 +89,15 @@ properties:
       - month
       - year
       - all
+    description: Can be used to specify the order in which the posts should get returned.
+
   search:
     type: string
+    description: Keywords to search for. Searching within specific fields is also possible, though keep in mind that Reddit may remove the ability to use any of these at any time
+
   extra-sort-by:
     enum:
       - engagement
+    description: Can be used to specify an additional sort which will be applied on top of the already sorted posts.
+
 
