@@ -1,20 +1,31 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#lobsters
+
 properties:
-  type:
-    enum:
-      - lobsters
   instance-url:
     type: string
+    description: The base URL for a lobsters instance hosted somewhere other than on lobste.rs.
+    examples:
+      - https://www.journalduhacker.net/
   custom-url:
     type: string
+    description: A custom URL to retrieve lobsters posts from. If this is specified, the instance-url, sort-by and tags properties are ignored.
+
   limit:
     type: integer
+    description: The maximum number of posts to show.
+
   collapse-after:
     type: integer
+    description: How many posts are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
+
   sort-by:
     enum:
       - hot
       - new
+    description: The sort order in which posts are returned.
+
   tags:
     type: array
     items:
       type: string
+    description: Limit to posts containing one of the given tags. You cannot specify a sort order when filtering by tags, it will default to hot.
