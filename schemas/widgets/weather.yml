@@ -1,20 +1,28 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#weather
+
+required:
+  - location
 properties:
-  type:
-    enum:
-      - weather
   location:
     type: string
+    description: The name of the city and country to fetch weather information for. See https://open-meteo.com/en/docs/geocoding-api.
+
   units:
     enum:
       - metric
       - imperial
+    description: Whether to show the temperature in celsius or fahrenheit, possible values are metric or imperial.
+
   hour-format:
     enum:
       - 12h
       - 24h
+    description: Whether to show the hours of the day in 12-hour format or 24-hour format.
+
   hide-location:
     type: boolean
+    description: Optionally don't display the location name on the widget.
+
   show-area-name:
     type: boolean
-required:
-  - location
+    description: Whether to display the state/administrative area in the location name.
