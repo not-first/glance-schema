@@ -1,30 +1,47 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#releases
+
+required:
+  - repositories
 properties:
-  type:
-    enum:
-      - releases
   repositories:
     type: array
+    description: A list of repositores to fetch the latest release for. Only the name/repo is required, not the full URL. A prefix can be specified for repositories hosted elsewhere such as GitLab, Codeberg and Docker Hub. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#repositories
+    examples:
+      - dockerhub:glanceapp/glance
     items:
       oneOf:
         - type: string
+
         - type: object
+          required:
+            - repository
+          additionalProperties: false
           properties:
             repository:
               type: string
+              description: The repository to fetch with prereleases enabled. Only available for Github repositories.
+              examples:
+                - glanceapp/glance
+
             include-prereleases:
               type: boolean
-          additionalProperties: false
-          required:
-            - repository
+
   show-source-icon:
     type: boolean
+    description: Shows an icon of the source (GitHub/GitLab/Codeberg/Docker Hub) next to the repository name when set to true.
+
   token:
     type: string
+    description: The github token to use for fetching releases. Useful to exceed the unauthorised rate limit of 60 requests per hour.
+
   gitlab-token:
     type: string
+    description: The GitLab token to use for fetching releases. Useful to exceed the unauthorised rate limit.
+
   limit:
     type: integer
+    description: The maximum number of releases to show.
+
   collapse-after:
     type: integer
-required:
-  - repositories
+    description: How many releases are visible before the "SHOW MORE" button appears. Set to -1 to never collapse.
