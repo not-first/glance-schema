@@ -1,33 +1,51 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#search-widget
+
 properties:
-  type:
-    enum:
-      - search
   search-engine:
+    description: Either a value from the table below or a URL to a custom search engine. Use {QUERY} to indicate where the query value gets placed.
     oneOf:
       - enum:
           - duckduckgo
           - google
       - type: string
         pattern: .*\{QUERY\}.*
+
   new-tab:
     type: boolean
+    description: When set to true, swaps the shortcuts for showing results in the same or new tab, defaulting to showing results in a new tab.
+
   autofocus:
     type: boolean
+    description: When set to true, automatically focuses the search input on page load.
+
   placeholder:
     type: string
+    description: When set, modifies the text displayed in the input field before typing.
+
   bangs:
     type: array
+    description: A list of bangs to use with the search engine. See https://duckduckgo.com/bangs
     items:
       type: object
-      properties:
-        title:
-          type: string
-        shortcut:
-          type: string
-        url:
-          type: string
-          pattern: .*\{QUERY\}.*
       additionalProperties: false
       required:
         - shortcut
         - url
+      properties:
+        title:
+          type: string
+          description: Optional title that will appear on the right side of the search bar when the query starts with the associated shortcut.
+
+        shortcut:
+          type: string
+          description: Any value you wish to use as the shortcut for the search engine. It does not have to start with !.
+          examples:
+            - "!yt"
+
+        url:
+          type: string
+          pattern: .*\{QUERY\}.*
+          description: The URL of the search engine. Use {QUERY} to indicate where the query value gets placed.
+          examples:
+            - "https://www.youtube.com/results?search_query={QUERY}"
+          errorMessage: Must be a valid URL with {QUERY} as a placeholder for the search query.
