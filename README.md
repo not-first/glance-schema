@@ -44,5 +44,8 @@ at the top of any `glance.yml` to test the locally generated version of the sche
 This file is ignored from commits, as it is built by a Github Action on push to ensure consistency. A locally generated schema will function the same as one generated automatically.
 
 #### Script Functionality
-*Detail functionality here . . .*
+1. Combines all the top-level properties into the base schema template (branding, pages etc)
+2. Loads the widget base properties, creates a specific schema combining this with every widget file
+3. Creates a definition for each widget and reference it in the schema
+4. Output schema to `schema.json`
 
