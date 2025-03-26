@@ -2,7 +2,7 @@
 *A JSON schema detailing the [Glance](https://github.com/glanceapp/glance) config file.*
 
 ## Usage
-For custom usage, the schema link can be found at https://raw.githubusercontent.com/not-first/glance-schema/main/schema.json.
+For custom usage, the schema link can be found at https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json.
 
 ### VS Code
 If you use VS Code to edit your `glance.yml`, the schema can be used to provide typing completions, hover descriptions and incorrect configuration errors.
