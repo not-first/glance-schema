@@ -10,8 +10,7 @@ If you use VS Code to edit your `glance.yml`, the schema can be used to provide 
 1. Install the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
 2. At the top of your `glance.yml` file, add this line:
    ```yaml
-   # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/main/schema.json
-
+   # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json
    ```
   3. Done.
 
