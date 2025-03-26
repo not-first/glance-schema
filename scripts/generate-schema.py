@@ -7,9 +7,11 @@ from alive_progress import alive_it
 
 
 def main():
-    # gather the relative file scripts
-    script_dir = Path(os.path.dirname(os.path.abspath(__file__)))
+    script_path = Path(os.path.abspath(__file__))
+    script_dir = script_path.parent
     project_dir = script_dir.parent
+
+    # Use absolute paths to prevent working directory issues
     schemas_dir = project_dir / "schemas"
     widgets_dir = schemas_dir / "widgets"
     output_file = project_dir / "schema.json"
