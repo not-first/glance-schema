@@ -10,16 +10,107 @@ properties:
 
   headers:
     type: object
-    description: Optionally specify headers that will be sent with the request. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#headers-1
-
+    description: Optionally specify headers that will be sent with the request.
     additionalProperties:
       type: string
 
+  method:
+    enum:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - OPTIONS
+      - HEAD
+    default: GET
+    description: The HTTP method to use when making the request.
+
+  body-type:
+    enum:
+      - json
+      - string
+    default: json
+    description: The type of the body that will be sent with the request.
+
+  body:
+    type:
+      - object
+      - string
+      - array
+    description: The body that will be sent with the request. Can be a string, map, or array depending on body-type.
+
   frameless:
     type: boolean
+    default: false
     description: When set to true, removes the border and padding around the widget.
+
+  allow-insecure:
+    type: boolean
+    default: false
+    description: Whether to ignore invalid/self-signed certificates.
 
   template:
     type: string
-    description: The template that will be used to display the data. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#template
+    description: The template that will be used to display the data. Uses Go's html/template package and tidwall's gjson package.
+
+  parameters:
+    type: object
+    description: A list of keys and values that will be sent to the custom-api as query parameters.
+    additionalProperties: true
+
+  subrequests:
+    type: object
+    description: A map of additional requests that will be executed concurrently and made available in the template via the .Subrequest property.
+    properties:
+      type: object
+      required:
+        - url
+      properties:
+        url:
+          type: string
+          description: The URL to fetch the data from.
+
+        headers:
+          type: object
+          description: Optionally specify headers that will be sent with the request.
+          additionalProperties:
+            type: string
+
+        method:
+          enum:
+            - GET
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - OPTIONS
+            - HEAD
+          default: GET
+          description: The HTTP method to use when making the request.
+
+        body-type:
+          enum:
+            - json
+            - string
+          default: json
+          description: The type of the body that will be sent with the request.
+
+        body:
+          type:
+            - object
+            - string
+            - array
+          description: The body that will be sent with the request. Can be a string, map, or array depending on body-type.
+
+        allow-insecure:
+          type: boolean
+          default: false
+          description: Whether to ignore invalid/self-signed certificates.
+
+        parameters:
+          type: object
+          description: A list of keys and values that will be sent as query parameters.
+          additionalProperties: true
+
 
