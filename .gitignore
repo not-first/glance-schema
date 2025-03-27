@@ -1,3 +1,3 @@
 .venv
-schema.json
+.DS_Store
 glance.yml
