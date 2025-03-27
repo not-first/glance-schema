@@ -48,6 +48,8 @@ properties:
         headers:
           type: object
           description: Optionally specify the headers that will be sent with the request.
+          examples:
+            - "x-api-key: your-api-key"
           additionalProperties:
             type: string
 
