@@ -43,7 +43,7 @@ To test locally, install the packages `alive-progress` and `yaml` in a python en
 ```
 yaml-language-server: $schema=file://{PATH_TO_YOUR_SCHEMA.JSON}
 ```
-at the top of any `glance.yml` to test the locally generated version of the schema.
+at the top of any `glance.yml` to test the locally generated version of the schema (in vscode).
 
 Remove this `schema.json` file from your commit if possible, as it is built by a Github Action on push to ensure consistency. A locally generated schema will function the same as one generated automatically.
 
