@@ -1084,13 +1084,18 @@
         },
         "frameless": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "When set to true, removes the border and padding around the widget."
         },
         "allow-insecure": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "description": "Whether to ignore invalid/self-signed certificates."
+        },
+        "skip-json-validation": {
+          "type": "boolean",
+          "default": true,
+          "description": "When set to true, skips the JSON validation step. This is useful when the API returns JSON Lines/newline-delimited JSON, which is a format that consists of several JSON objects separated by newlines."
         },
         "template": {
           "type": "string",
