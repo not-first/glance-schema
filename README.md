@@ -2,7 +2,7 @@
 *A JSON schema detailing the [Glance](https://github.com/glanceapp/glance) config file.*
 
 > [!NOTE]
-> Currently supports version: v0.7.9
+> Currently supports version: v0.7.12
 
 ## Usage
 For custom usage, the schema link can be found at https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json.
