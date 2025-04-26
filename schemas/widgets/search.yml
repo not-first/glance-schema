@@ -18,6 +18,15 @@ properties:
     type: boolean
     description: When set to true, automatically focuses the search input on page load.
 
+  target:
+    type: string
+    enum:
+      - _blank
+      - _self
+      - _parent
+      - _top
+    description: The target to use when opening the search results in a new tab.
+
   placeholder:
     type: string
     description: When set, modifies the text displayed in the input field before typing.
