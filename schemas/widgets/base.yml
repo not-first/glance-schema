@@ -26,3 +26,7 @@ properties:
   css-class:
     type: string
     description: Set custom CSS classes for the specific widget instance.
+
+  hide-header:
+    type: boolean
+    description: Hides the widget header when set to true. Not available for group widgets.

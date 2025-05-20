@@ -38,6 +38,15 @@ pages:
         type: boolean
         description: Whether to show a header displaying the name of the page on mobile. The header purposefully has a lot of vertical whitespace in order to push the content down and make it easier to reach on tall devices.
 
+      desktop-navigation-width:
+        enum:
+          - default
+          - slim
+          - wide
+        description: |
+          The width of the navigation bar on desktop. Can be 'default', 'slim', or 'wide'.
+          If not set, inherits from the 'width' property.
+
       columns:
         type: array
         description: A list of columns to display on the page.
@@ -46,7 +55,7 @@ pages:
           type: object
 
           required:
-          - size
+            - size
           properties:
             size:
               enum:
@@ -61,3 +70,9 @@ pages:
               items:
                 $ref: "#/definitions/widget"
 
+      head-widgets:
+        type: array
+        description: |
+          An array of widgets that will appear above the columns on this page. Each item should be a widget object.
+        items:
+          $ref: "#/definitions/widget"

@@ -8,7 +8,8 @@ properties:
       - adguard
       - pihole
       - pihole-v6
-    description: Either adguard, or pihole (major version 5 and below) or pihole-v6 (major version 6 and above).
+      - technitium
+    description: Either adguard, pihole (v5 and below), pihole-v6 (v6+), or technitium.
 
   allow-insecure:
     type: boolean
@@ -28,7 +29,7 @@ properties:
 
   token:
     type: string
-    description: Only required when using Pi-hole major version 5 or earlier. The API token which can be found in Settings -> API -> Show API token.
+    description: Required for Pi-hole v5 or earlier and for Technitium. The API token for the service.
 
   hide-graph:
     type: boolean

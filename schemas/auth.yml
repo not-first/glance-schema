@@ -1,0 +1,27 @@
+type: object
+
+properties:
+  secret-key:
+    type: string
+    description: Secret key for session signing. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#authentication.
+
+  users:
+    type: object
+    description: Map of usernames to authentication details. Each user can have either a password (plain or env var) or a password hash.
+    additionalProperties:
+      type: object
+      properties:
+        password:
+          type: string
+          description: Password for the user. Can use env var syntax (e.g., ${ADMIN_PASSWORD}).
+
+        password-hash:
+          type: string
+          description: Bcrypt hash of the user's password.
+
+      oneOf:
+        - required: [password]
+        - required: [password-hash]
+required:
+  - secret-key
+  - users

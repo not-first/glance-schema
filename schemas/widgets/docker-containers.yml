@@ -5,6 +5,53 @@ properties:
     type: boolean
     description: "Whether to hide the containers by default. If set to true you'll have to manually add a glance.hide: false label to each container you want to display. By default all containers will be shown and if you want to hide a specific container you can add a glance.hide: true label."
 
+  format-container-names:
+    type: boolean
+    description: "When set to true, automatically converts container names such as container_name_1 into Container Name 1."
+
   sock-path:
     type: string
-    description: The path to the Docker socket.
+    description: "The path or URI to the Docker socket (e.g., /var/run/docker.sock or http://docker-socket-proxy:2375)."
+
+  category:
+    type: string
+    description: "Filter to only the containers which have this category specified via the glance.category label."
+
+  running-only:
+    type: boolean
+    description: "Whether to only show running containers. If set to true only containers that are currently running will be displayed. If set to false all containers will be displayed regardless of their state."
+
+  containers:
+    type: object
+    description: |
+      Per-container customization. Each key is the container name, and the value is an object with the same properties as the labels (without the "glance." prefix).
+    additionalProperties:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "The name displayed in the UI. If not specified, the name of the container will be used."
+        icon:
+          type: string
+          description: "The icon displayed in the UI. Can be an external URL or an icon prefixed with si:, sh: or di:."
+        url:
+          type: string
+          description: "The URL that the user will be redirected to when clicking on the container."
+        same-tab:
+          type: boolean
+          description: "Whether to open the link in the same or a new tab. Default is false."
+        description:
+          type: string
+          description: "A short description displayed in the UI. Default is empty."
+        hide:
+          type: boolean
+          description: "Whether to hide the container. If set to true the container will not be displayed. Defaults to false."
+        id:
+          type: string
+          description: "The custom ID of the container. Used to group containers under a single parent."
+        parent:
+          type: string
+          description: "The ID of the parent container. Used to group containers under a single parent."
+        category:
+          type: string
+          description: "The category of the container. Used to filter containers by category."

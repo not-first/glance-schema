@@ -1,7 +1,6 @@
 # https://github.com/glanceapp/glance/blob/main/docs/configuration.md#custom-api
 
 required:
-  - url
   - template
 properties:
   url:
@@ -125,3 +124,8 @@ properties:
           examples:
             - "key: value"
           additionalProperties: true
+
+  options:
+    type: object
+    description: Custom preferences accessible by the custom-api widget template.
+    additionalProperties: true

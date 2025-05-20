@@ -1,0 +1,6 @@
+# https://github.com/glanceapp/glance/blob/main/docs/configuration.md#todo
+
+properties:
+  id:
+    type: string
+    description: Required if multiple to-do widgets are present. Used to distinguish between them.

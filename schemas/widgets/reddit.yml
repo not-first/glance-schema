@@ -74,8 +74,6 @@ properties:
               - 10s
             errorMessage: Must be a valid time duration.
 
-
-
   sort-by:
     enum:
       - hot
@@ -103,4 +101,19 @@ properties:
       - engagement
     description: Can be used to specify an additional sort which will be applied on top of the already sorted posts.
 
-
+  app-auth:
+    type: object
+    description: Reddit API credentials for app authentication.
+    properties:
+      client-id:
+        type: string
+        description: Reddit API client ID.
+      client-secret:
+        type: string
+        description: Reddit API client secret.
+      username:
+        type: string
+        description: Reddit username for authentication.
+      password:
+        type: string
+        description: Reddit password for authentication.

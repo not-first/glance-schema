@@ -20,3 +20,15 @@ branding:
     favicon-url:
       type: string
       description: Specify a URL to a custom image to use for the favicon.
+
+    app-name:
+      type: string
+      description: Name of the app for PWA installation and display.
+
+    app-icon:
+      type: string
+      description: URL to the app icon for PWA installation.
+
+    app-background-color:
+      type: string
+      description: Background color for the PWA splash screen (CSS color value).
