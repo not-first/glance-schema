@@ -2,6 +2,46 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
+    "type": "object",
+    "properties": {
+      "secret-key": {
+        "type": "string",
+        "description": "Secret key for session signing. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#authentication."
+      },
+      "users": {
+        "type": "object",
+        "description": "Map of usernames to authentication details. Each user can have either a password (plain or env var) or a password hash.",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "password": {
+              "type": "string",
+              "description": "Password for the user. Can use env var syntax (e.g., ${ADMIN_PASSWORD})."
+            },
+            "password-hash": {
+              "type": "string",
+              "description": "Bcrypt hash of the user's password."
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "password"
+              ]
+            },
+            {
+              "required": [
+                "password-hash"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "required": [
+      "secret-key",
+      "users"
+    ],
     "server": {
       "type": "object",
       "properties": {
@@ -68,6 +108,14 @@
             "type": "boolean",
             "description": "Whether to show a header displaying the name of the page on mobile. The header purposefully has a lot of vertical whitespace in order to push the content down and make it easier to reach on tall devices."
           },
+          "desktop-navigation-width": {
+            "enum": [
+              "default",
+              "slim",
+              "wide"
+            ],
+            "description": "The width of the navigation bar on desktop. Can be 'default', 'slim', or 'wide'.\nIf not set, inherits from the 'width' property.\n"
+          },
           "columns": {
             "type": "array",
             "description": "A list of columns to display on the page.",
@@ -93,6 +141,13 @@
                   }
                 }
               }
+            }
+          },
+          "head-widgets": {
+            "type": "array",
+            "description": "An array of widgets that will appear above the columns on this page. Each item should be a widget object.\n",
+            "items": {
+              "$ref": "#/definitions/widget"
             }
           }
         }
@@ -120,6 +175,18 @@
         "favicon-url": {
           "type": "string",
           "description": "Specify a URL to a custom image to use for the favicon."
+        },
+        "app-name": {
+          "type": "string",
+          "description": "Name of the app for PWA installation and display."
+        },
+        "app-icon": {
+          "type": "string",
+          "description": "URL to the app icon for PWA installation."
+        },
+        "app-background-color": {
+          "type": "string",
+          "description": "Background color for the PWA splash screen (CSS color value)."
         }
       }
     },
@@ -128,13 +195,14 @@
       "properties": {
         "light": {
           "type": "boolean",
-          "description": "Whether the scheme is light or dark. This does not change the background color, it inverts the text colors so that they look appropriately on a light background."
+          "description": "Whether the scheme is light or dark. This does not change the background color, it inverts the text colors so that they look appropriately on a light background.",
+          "default": false
         },
         "background-color": {
           "type": "string",
           "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
           "description": "Color of the page and widgets.",
-          "default": "",
+          "default": "240 8 9",
           "examples": [
             "240 8 9"
           ],
@@ -144,6 +212,7 @@
           "type": "string",
           "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
           "description": "Color used across the page, largely to indicate unvisited links.",
+          "default": "43 50 70",
           "examples": [
             "43 50 70"
           ],
@@ -153,8 +222,9 @@
           "type": "string",
           "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
           "description": "Used to indicate that something is positive, such as stock price being up, twitch channel being live or a monitored site being online. If not set, the value of primary-color will be used.",
+          "default": "",
           "examples": [
-            "43 50 70s"
+            "43 50 70"
           ],
           "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
         },
@@ -162,6 +232,7 @@
           "type": "string",
           "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
           "description": "Oppposite of positive-color.",
+          "default": "0 70 70",
           "examples": [
             "0 70 70"
           ],
@@ -169,11 +240,13 @@
         },
         "contrast-multiplier": {
           "type": "number",
-          "description": "Used to increase or decrease the contrast (in other words visibility) of the text. A value of 1.3 means that the text will be 30% lighter/darker depending on the scheme."
+          "description": "Used to increase or decrease the contrast (in other words visibility) of the text. A value of 1.3 means that the text will be 30% lighter/darker depending on the scheme.",
+          "default": 1
         },
         "text-saturation-multiplier": {
           "type": "number",
-          "description": "Used to increase or decrease the saturation of text, useful when using a custom background color with a high amount of saturation and needing the text to have a more neutral color. 0.5 means that the saturation will be 50% lower and 1.5 means that it'll be 50% higher."
+          "description": "Used to increase or decrease the saturation of text, useful when using a custom background color with a high amount of saturation and needing the text to have a more neutral color. 0.5 means that the saturation will be 50% lower and 1.5 means that it'll be 50% higher.",
+          "default": 1
         },
         "custom-css-file": {
           "type": "string",
@@ -183,6 +256,69 @@
             "/assets/my-style.css"
           ],
           "errorMessage": "Must be a file path to a CSS file ending in \".css\"."
+        },
+        "disable-picker": {
+          "type": "boolean",
+          "description": "When set to true hides the theme picker and disables the ability to switch between themes. All users who previously picked a non-default theme will be switched over to the default theme.",
+          "default": false
+        },
+        "presets": {
+          "type": "object",
+          "description": "Define additional theme presets that can be selected from the theme picker on the page. For each preset, you can specify the same properties as for the default theme, except for the custom-css-file property.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "light": {
+                "type": "boolean",
+                "description": "Whether the scheme is light or dark. This does not change the background color, it inverts the text colors so that they look appropriately on a light background.",
+                "default": false
+              },
+              "background-color": {
+                "type": "string",
+                "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+                "description": "Color of the page and widgets.",
+                "examples": [
+                  "240 8 9"
+                ],
+                "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+              },
+              "primary-color": {
+                "type": "string",
+                "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+                "description": "Color used across the page, largely to indicate unvisited links.",
+                "examples": [
+                  "43 50 70"
+                ],
+                "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+              },
+              "positive-color": {
+                "type": "string",
+                "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+                "description": "Used to indicate that something is positive, such as stock price being up, twitch channel being live or a monitored site being online. If not set, the value of primary-color will be used.",
+                "examples": [
+                  "43 50 70"
+                ],
+                "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+              },
+              "negative-color": {
+                "type": "string",
+                "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+                "description": "Oppposite of positive-color.",
+                "examples": [
+                  "0 70 70"
+                ],
+                "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+              },
+              "contrast-multiplier": {
+                "type": "number",
+                "description": "Used to increase or decrease the contrast (in other words visibility) of the text. A value of 1.3 means that the text will be 30% lighter/darker depending on the scheme."
+              },
+              "text-saturation-multiplier": {
+                "type": "number",
+                "description": "Used to increase or decrease the saturation of text, useful when using a custom background color with a high amount of saturation and needing the text to have a more neutral color. 0.5 means that the saturation will be 50% lower and 1.5 means that it'll be 50% higher."
+              }
+            }
+          }
         }
       }
     },
@@ -206,6 +342,7 @@
         "type": {
           "enum": [
             "markets",
+            "to-do",
             "monitor",
             "hacker-news",
             "clock",
@@ -254,6 +391,10 @@
         "css-class": {
           "type": "string",
           "description": "Set custom CSS classes for the specific widget instance."
+        },
+        "hide-header": {
+          "type": "boolean",
+          "description": "Hides the widget header when set to true. Not available for group widgets."
         }
       }
     },
@@ -322,6 +463,19 @@
         }
       }
     },
+    "to-do-widget": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Required if multiple to-do widgets are present. Used to distinguish between them."
+        },
+        "type": {
+          "enum": [
+            "to-do"
+          ]
+        }
+      }
+    },
     "monitor-widget": {
       "required": [
         "sites"
@@ -380,6 +534,29 @@
                 "items": {
                   "type": "integer"
                 }
+              },
+              "basic-auth": {
+                "type": "object",
+                "description": "Basic authentication credentials for the site.",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "Username for basic authentication."
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Password for basic authentication."
+                  }
+                }
+              },
+              "timeout": {
+                "type": "string",
+                "pattern": "^\\d+[smhd]$",
+                "description": "The maximum time to wait for a response from the site. The value is a string and must be a number followed by one of s, m, h, d.",
+                "examples": [
+                  "10s"
+                ],
+                "errorMessage": "Must be a valid time duration."
               }
             }
           }
@@ -537,9 +714,66 @@
           "type": "boolean",
           "description": "Whether to hide the containers by default. If set to true you'll have to manually add a glance.hide: false label to each container you want to display. By default all containers will be shown and if you want to hide a specific container you can add a glance.hide: true label."
         },
+        "format-container-names": {
+          "type": "boolean",
+          "description": "When set to true, automatically converts container names such as container_name_1 into Container Name 1."
+        },
         "sock-path": {
           "type": "string",
-          "description": "The path to the Docker socket."
+          "description": "The path or URI to the Docker socket (e.g., /var/run/docker.sock or http://docker-socket-proxy:2375)."
+        },
+        "category": {
+          "type": "string",
+          "description": "Filter to only the containers which have this category specified via the glance.category label."
+        },
+        "running-only": {
+          "type": "boolean",
+          "description": "Whether to only show running containers. If set to true only containers that are currently running will be displayed. If set to false all containers will be displayed regardless of their state."
+        },
+        "containers": {
+          "type": "object",
+          "description": "Per-container customization. Each key is the container name, and the value is an object with the same properties as the labels (without the \"glance.\" prefix).\n",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name displayed in the UI. If not specified, the name of the container will be used."
+              },
+              "icon": {
+                "type": "string",
+                "description": "The icon displayed in the UI. Can be an external URL or an icon prefixed with si:, sh: or di:."
+              },
+              "url": {
+                "type": "string",
+                "description": "The URL that the user will be redirected to when clicking on the container."
+              },
+              "same-tab": {
+                "type": "boolean",
+                "description": "Whether to open the link in the same or a new tab. Default is false."
+              },
+              "description": {
+                "type": "string",
+                "description": "A short description displayed in the UI. Default is empty."
+              },
+              "hide": {
+                "type": "boolean",
+                "description": "Whether to hide the container. If set to true the container will not be displayed. Defaults to false."
+              },
+              "id": {
+                "type": "string",
+                "description": "The custom ID of the container. Used to group containers under a single parent."
+              },
+              "parent": {
+                "type": "string",
+                "description": "The ID of the parent container. Used to group containers under a single parent."
+              },
+              "category": {
+                "type": "string",
+                "description": "The category of the container. Used to filter containers by category."
+              }
+            }
+          }
         },
         "type": {
           "enum": [
@@ -816,7 +1050,6 @@
     },
     "custom-api-widget": {
       "required": [
-        "url",
         "template"
       ],
       "properties": {
@@ -958,6 +1191,11 @@
             }
           }
         },
+        "options": {
+          "type": "object",
+          "description": "Custom preferences accessible by the custom-api widget template.",
+          "additionalProperties": true
+        },
         "type": {
           "enum": [
             "custom-api"
@@ -1082,6 +1320,28 @@
             "engagement"
           ],
           "description": "Can be used to specify an additional sort which will be applied on top of the already sorted posts."
+        },
+        "app-auth": {
+          "type": "object",
+          "description": "Reddit API credentials for app authentication.",
+          "properties": {
+            "client-id": {
+              "type": "string",
+              "description": "Reddit API client ID."
+            },
+            "client-secret": {
+              "type": "string",
+              "description": "Reddit API client secret."
+            },
+            "username": {
+              "type": "string",
+              "description": "Reddit username for authentication."
+            },
+            "password": {
+              "type": "string",
+              "description": "Reddit password for authentication."
+            }
+          }
         },
         "type": {
           "enum": [
@@ -1329,9 +1589,10 @@
           "enum": [
             "adguard",
             "pihole",
-            "pihole-v6"
+            "pihole-v6",
+            "technitium"
           ],
-          "description": "Either adguard, or pihole (major version 5 and below) or pihole-v6 (major version 6 and above)."
+          "description": "Either adguard, pihole (v5 and below), pihole-v6 (v6+), or technitium."
         },
         "allow-insecure": {
           "type": "boolean",
@@ -1351,7 +1612,7 @@
         },
         "token": {
           "type": "string",
-          "description": "Only required when using Pi-hole major version 5 or earlier. The API token which can be found in Settings -> API -> Show API token."
+          "description": "Required for Pi-hole v5 or earlier and for Technitium. The API token for the service."
         },
         "hide-graph": {
           "type": "boolean",
@@ -1646,6 +1907,9 @@
           "oneOf": [
             {
               "$ref": "#/definitions/markets-widget"
+            },
+            {
+              "$ref": "#/definitions/to-do-widget"
             },
             {
               "$ref": "#/definitions/monitor-widget"
