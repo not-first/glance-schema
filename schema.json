@@ -28,78 +28,6 @@
         }
       }
     },
-    "document": {
-      "type": "object",
-      "properties": {
-        "head": {
-          "type": "string",
-          "description": "The HTML to be included in the head of the document."
-        }
-      }
-    },
-    "theme": {
-      "type": "object",
-      "properties": {
-        "light": {
-          "type": "boolean",
-          "description": "Whether the scheme is light or dark. This does not change the background color, it inverts the text colors so that they look appropriately on a light background."
-        },
-        "background-color": {
-          "type": "string",
-          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
-          "description": "Color of the page and widgets.",
-          "default": "",
-          "examples": [
-            "240 8 9"
-          ],
-          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
-        },
-        "primary-color": {
-          "type": "string",
-          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
-          "description": "Color used across the page, largely to indicate unvisited links.",
-          "examples": [
-            "43 50 70"
-          ],
-          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
-        },
-        "positive-color": {
-          "type": "string",
-          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
-          "description": "Used to indicate that something is positive, such as stock price being up, twitch channel being live or a monitored site being online. If not set, the value of primary-color will be used.",
-          "examples": [
-            "43 50 70s"
-          ],
-          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
-        },
-        "negative-color": {
-          "type": "string",
-          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
-          "description": "Oppposite of positive-color.",
-          "examples": [
-            "0 70 70"
-          ],
-          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
-        },
-        "contrast-multiplier": {
-          "type": "number",
-          "description": "Used to increase or decrease the contrast (in other words visibility) of the text. A value of 1.3 means that the text will be 30% lighter/darker depending on the scheme."
-        },
-        "text-saturation-multiplier": {
-          "type": "number",
-          "description": "Used to increase or decrease the saturation of text, useful when using a custom background color with a high amount of saturation and needing the text to have a more neutral color. 0.5 means that the saturation will be 50% lower and 1.5 means that it'll be 50% higher."
-        },
-        "custom-css-file": {
-          "type": "string",
-          "pattern": "^.*\\.css$",
-          "description": "Path to a custom CSS file, either external or one from within the server configured assets path.",
-          "examples": [
-            "/assets/my-style.css"
-          ],
-          "errorMessage": "Must be a file path to a CSS file ending in \".css\"."
-        }
-      }
-    },
     "pages": {
       "type": "array",
       "required": [
@@ -194,6 +122,78 @@
           "description": "Specify a URL to a custom image to use for the favicon."
         }
       }
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "light": {
+          "type": "boolean",
+          "description": "Whether the scheme is light or dark. This does not change the background color, it inverts the text colors so that they look appropriately on a light background."
+        },
+        "background-color": {
+          "type": "string",
+          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+          "description": "Color of the page and widgets.",
+          "default": "",
+          "examples": [
+            "240 8 9"
+          ],
+          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+        },
+        "primary-color": {
+          "type": "string",
+          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+          "description": "Color used across the page, largely to indicate unvisited links.",
+          "examples": [
+            "43 50 70"
+          ],
+          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+        },
+        "positive-color": {
+          "type": "string",
+          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+          "description": "Used to indicate that something is positive, such as stock price being up, twitch channel being live or a monitored site being online. If not set, the value of primary-color will be used.",
+          "examples": [
+            "43 50 70s"
+          ],
+          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+        },
+        "negative-color": {
+          "type": "string",
+          "pattern": "^\\d{1,3} \\d{1,3} \\d{1,3}$",
+          "description": "Oppposite of positive-color.",
+          "examples": [
+            "0 70 70"
+          ],
+          "errorMessage": "Must be a valid HSL color in the format of \"H S L\"."
+        },
+        "contrast-multiplier": {
+          "type": "number",
+          "description": "Used to increase or decrease the contrast (in other words visibility) of the text. A value of 1.3 means that the text will be 30% lighter/darker depending on the scheme."
+        },
+        "text-saturation-multiplier": {
+          "type": "number",
+          "description": "Used to increase or decrease the saturation of text, useful when using a custom background color with a high amount of saturation and needing the text to have a more neutral color. 0.5 means that the saturation will be 50% lower and 1.5 means that it'll be 50% higher."
+        },
+        "custom-css-file": {
+          "type": "string",
+          "pattern": "^.*\\.css$",
+          "description": "Path to a custom CSS file, either external or one from within the server configured assets path.",
+          "examples": [
+            "/assets/my-style.css"
+          ],
+          "errorMessage": "Must be a file path to a CSS file ending in \".css\"."
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "head": {
+          "type": "string",
+          "description": "The HTML to be included in the head of the document."
+        }
+      }
     }
   },
   "definitions": {
@@ -205,32 +205,32 @@
       "properties": {
         "type": {
           "enum": [
-            "custom-api",
+            "markets",
+            "monitor",
             "hacker-news",
-            "reddit",
-            "weather",
-            "search",
-            "iframe",
-            "dns-stats",
-            "lobsters",
+            "clock",
+            "html",
+            "twitch-top-games",
+            "split-column",
             "docker-containers",
             "videos",
-            "repository",
-            "change-detection",
-            "twitch-channels",
-            "markets",
-            "server-stats",
-            "clock",
-            "split-column",
             "extension",
-            "html",
-            "calendar",
+            "server-stats",
             "releases",
+            "twitch-channels",
+            "custom-api",
+            "reddit",
+            "calendar",
+            "change-detection",
+            "search",
+            "lobsters",
+            "iframe",
+            "repository",
+            "dns-stats",
+            "weather",
             "group",
-            "bookmarks",
             "rss",
-            "monitor",
-            "twitch-top-games"
+            "bookmarks"
           ],
           "description": "Used to specify the widget."
         },
@@ -254,6 +254,563 @@
         "css-class": {
           "type": "string",
           "description": "Set custom CSS classes for the specific widget instance."
+        }
+      }
+    },
+    "markets-widget": {
+      "required": [
+        "markets"
+      ],
+      "properties": {
+        "markets": {
+          "type": "array",
+          "description": "An array of markets for which to display information about.",
+          "items": {
+            "type": "object",
+            "required": [
+              "symbol"
+            ],
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "The symbol, as seen in Yahoo Finance."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name that will be displayed under the symbol."
+              },
+              "symbol-link": {
+                "type": "string",
+                "description": "The link to go to when clicking on the symbol."
+              },
+              "chart-link": {
+                "type": "string",
+                "description": "The link to go to when clicking on the chart."
+              }
+            }
+          }
+        },
+        "sort-by": {
+          "enum": [
+            "change",
+            "absolute-change"
+          ],
+          "description": "By default the markets are displayed in the order they were defined. You can customize their ordering by setting the sort-by property to change for descending order based on the stock's percentage change (e.g. 1% would be sorted higher than -1%) or absolute-change for descending order based on the stock's absolute price change (e.g. -1% would be sorted higher than +0.5%)."
+        },
+        "chart-link-template": {
+          "type": "string",
+          "pattern": ".*\\{SYMBOL\\}.*",
+          "description": "A template for the link to go to when clicking on the chart that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a chart-link property.",
+          "examples": [
+            "https://www.tradingview.com/chart/?symbol={SYMBOL}"
+          ],
+          "errorMessage": "Must be a valid chart link template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#chart-link-template"
+        },
+        "symbol-link-template": {
+          "type": "string",
+          "pattern": ".*\\{SYMBOL\\}.*",
+          "description": "A template for the link to go to when clicking on the symbol that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a symbol-link property.",
+          "examples": [
+            "https://www.google.com/search?tbm=nws&q={SYMBOL}"
+          ],
+          "errorMessage": "Must be a valid symbol link template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#symbol-link-template"
+        },
+        "type": {
+          "enum": [
+            "markets"
+          ]
+        }
+      }
+    },
+    "monitor-widget": {
+      "required": [
+        "sites"
+      ],
+      "properties": {
+        "show-failing-only": {
+          "type": "boolean",
+          "description": "Shows only a list of failing sites when set to true."
+        },
+        "style": {
+          "enum": [
+            "compact"
+          ],
+          "description": "Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-3 for examples."
+        },
+        "sites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "url"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The title used to indicate the site."
+              },
+              "url": {
+                "type": "string",
+                "description": "The public facing URL of a monitored service, the user will be redirected here. If check-url is not specified, this is used as the status check."
+              },
+              "check-url": {
+                "type": "string",
+                "description": "The URL which will be requested and its response will determine the status of the site. If not specified, the url property is used."
+              },
+              "error-url": {
+                "type": "string",
+                "description": "If the monitored service returns an error, the user will be redirected here. If not specified, the url property is used."
+              },
+              "icon": {
+                "type": "string",
+                "description": "Optional URL to an image which will be used as the icon for the site. Can be an external URL or internal via server configured assets. You can also directly use Simple Icons via a si: prefix or Dashboard Icons via a di: prefix:"
+              },
+              "allow-insecure": {
+                "type": "boolean",
+                "description": "Whether to ignore invalid/self-signed certificates."
+              },
+              "same-tab": {
+                "type": "boolean",
+                "description": "Whether to open the link in the same or a new tab."
+              },
+              "alt-status-codes": {
+                "type": "array",
+                "description": "Status codes other than 200 that you want to return \"OK\".",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "type": {
+          "enum": [
+            "monitor"
+          ]
+        }
+      }
+    },
+    "hacker-news-widget": {
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of posts to show."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many posts are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "comments-url-template": {
+          "type": "string",
+          "pattern": ".*\\{POST-ID\\}.*",
+          "description": "Used to replace the default link for post comments. Useful if you want to use an alternative front-end.",
+          "examples": [
+            "https://www.hckrnws.com/stories/{POST-ID}"
+          ],
+          "errorMessage": "Must be a valid comments url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template"
+        },
+        "sort-by": {
+          "enum": [
+            "top",
+            "new",
+            "best"
+          ],
+          "description": "Used to specify the order in which the posts should get returned."
+        },
+        "extra-sort-by": {
+          "enum": [
+            "engagement"
+          ],
+          "description": "Can be used to specify an additional sort which will be applied on top of the already sorted posts."
+        },
+        "type": {
+          "enum": [
+            "hacker-news"
+          ]
+        }
+      }
+    },
+    "clock-widget": {
+      "properties": {
+        "hour-format": {
+          "enum": [
+            "12h",
+            "24h"
+          ],
+          "description": "Whether to show the time in 12 or 24 hour format."
+        },
+        "timezones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "timezone"
+            ],
+            "properties": {
+              "timezone": {
+                "type": "string",
+                "description": "A timezone identifier such as Europe/London, America/New_York, etc. The full list of available identifiers can be found here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones."
+              },
+              "label": {
+                "type": "string",
+                "description": "Optionally, override the display value for the timezone to something more meaningful such as \"Home\", \"Work\" or anything else."
+              }
+            }
+          }
+        },
+        "type": {
+          "enum": [
+            "clock"
+          ]
+        }
+      }
+    },
+    "html-widget": {
+      "required": [
+        "source"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The HTML source code to render. Javascript should be included in the document head."
+        },
+        "type": {
+          "enum": [
+            "html"
+          ]
+        }
+      }
+    },
+    "twitch-top-games-widget": {
+      "properties": {
+        "exclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of categories that will never be shown. You must provide the slug found by clicking on the category and looking at the URL."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of games to show."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many games are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "type": {
+          "enum": [
+            "twitch-top-games"
+          ]
+        }
+      }
+    },
+    "split-column-widget": {
+      "required": [
+        "widgets"
+      ],
+      "properties": {
+        "max-columns": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "The maximum number of columns to split the widgets into."
+        },
+        "widgets": {
+          "type": "array",
+          "minItems": 2,
+          "description": "A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.",
+          "items": {
+            "$ref": "#/definitions/widget"
+          }
+        },
+        "type": {
+          "enum": [
+            "split-column"
+          ]
+        }
+      }
+    },
+    "docker-containers-widget": {
+      "properties": {
+        "hide-by-default": {
+          "type": "boolean",
+          "description": "Whether to hide the containers by default. If set to true you'll have to manually add a glance.hide: false label to each container you want to display. By default all containers will be shown and if you want to hide a specific container you can add a glance.hide: true label."
+        },
+        "sock-path": {
+          "type": "string",
+          "description": "The path to the Docker socket."
+        },
+        "type": {
+          "enum": [
+            "docker-containers"
+          ]
+        }
+      }
+    },
+    "videos-widget": {
+      "required": [
+        "channels"
+      ],
+      "properties": {
+        "channels": {
+          "type": "array",
+          "description": "A list of channels IDs. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#channels for how to get a channel ID.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playlists": {
+          "type": "array",
+          "description": "https://github.com/glanceapp/glance/blob/main/docs/configuration.md#channels",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of videos to show."
+        },
+        "style": {
+          "enum": [
+            "horizontal-cards",
+            "vertical-list",
+            "grid-cards"
+          ],
+          "description": "Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-1 for examples."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "Specify the number of videos to show when using the vertical-list style before the \"SHOW MORE\" button appears."
+        },
+        "collapse-after-rows": {
+          "type": "integer",
+          "description": "Specify the number of rows to show when using the grid-cards style before the \"SHOW MORE\" button appears."
+        },
+        "include-shorts": {
+          "type": "boolean",
+          "description": "Whether to include YouTube Shorts videos in the widget."
+        },
+        "video-url-template": {
+          "type": "string",
+          "pattern": ".*\\{VIDEO-ID\\}.*",
+          "description": "Used to replace the default link for videos. Useful when you're running your own YouTube front-end.",
+          "examples": [
+            "https://invidious.your-domain.com/watch?v={VIDEO-ID}"
+          ],
+          "errorMessage": "Must be a valid video url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#video-url-template"
+        },
+        "type": {
+          "enum": [
+            "videos"
+          ]
+        }
+      }
+    },
+    "extension-widget": {
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the extension. Note that the query gets stripped from this URL and the one defined by parameters gets used instead."
+        },
+        "fallback-content-type": {
+          "enum": [
+            "html"
+          ],
+          "description": "Optionally specify the fallback content type of the extension if the URL does not return a valid Widget-Content-Type header. Currently the only supported value for this property is html."
+        },
+        "allow-potentially-dangerous-html": {
+          "type": "boolean",
+          "description": "Whether to allow the extension to display HTML. Must be enabled for html to render. Ensure you are aware the extension url you are using is safe."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true,
+          "examples": [
+            "key: value"
+          ],
+          "description": "A list of keys and values that will be sent to the extension as query paramters."
+        },
+        "type": {
+          "enum": [
+            "extension"
+          ]
+        }
+      }
+    },
+    "server-stats-widget": {
+      "properties": {
+        "servers": {
+          "type": "array",
+          "description": "If not provided it will display the statistics of the server Glance is running on.",
+          "items": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "local",
+                  "remote"
+                ],
+                "description": "Whether to display statistics for the local server or a remote server."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the server which will be displayed on the widget. If not provided it will default to the server's hostname."
+              },
+              "hide-swap": {
+                "type": "boolean",
+                "description": "Whether to hide the swap usage."
+              },
+              "cpu-temp-sensor": {
+                "type": "string",
+                "description": "The name of the sensor to use for the CPU temperature. When not provided the widget will attempt to find the correct one, if it fails to do so the temperature will not be displayed. To view the available sensors you can use sensors command"
+              },
+              "hide-mountpoints-by-default": {
+                "type": "boolean",
+                "description": "If set to true you'll have to manually make each mountpoint visible by adding a hide: false property."
+              },
+              "mountpoints": {
+                "type": "object",
+                "description": "A map of mountpoints to display disk usage for. The key is the path to the mountpoint and the value is an object with optional properties.",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the mountpoint which will be displayed on the widget. If not provided it will default to the mountpoint's path."
+                    },
+                    "hide": {
+                      "type": "boolean",
+                      "description": "Whether to hide this mountpoint from the widget."
+                    }
+                  }
+                }
+              },
+              "url": {
+                "type": "string",
+                "description": "The URL and port of the server to fetch the statistics from."
+              },
+              "token": {
+                "type": "string",
+                "description": "The authentication token to use when fetching the statistics."
+              },
+              "timeout": {
+                "type": "string",
+                "pattern": "^\\d+[smhd]$",
+                "description": "The maximum time to wait for a response from the server. The value is a string and must be a number followed by one of s, m, h, d.",
+                "examples": [
+                  "10s"
+                ],
+                "errorMessage": "Must be a valid time duration."
+              }
+            }
+          }
+        },
+        "type": {
+          "enum": [
+            "server-stats"
+          ]
+        }
+      }
+    },
+    "releases-widget": {
+      "required": [
+        "repositories"
+      ],
+      "properties": {
+        "repositories": {
+          "type": "array",
+          "description": "A list of repositores to fetch the latest release for. Only the name/repo is required, not the full URL. A prefix can be specified for repositories hosted elsewhere such as GitLab, Codeberg and Docker Hub. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#repositories",
+          "examples": [
+            "dockerhub:glanceapp/glance"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "repository"
+                ],
+                "properties": {
+                  "repository": {
+                    "type": "string",
+                    "description": "The repository to fetch with prereleases enabled. Only available for Github repositories.",
+                    "examples": [
+                      "glanceapp/glance"
+                    ]
+                  },
+                  "include-prereleases": {
+                    "type": "boolean",
+                    "description": "Whether to include prereleases in the list of releases. Only available for Github repositories."
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "show-source-icon": {
+          "type": "boolean",
+          "description": "Shows an icon of the source (GitHub/GitLab/Codeberg/Docker Hub) next to the repository name when set to true."
+        },
+        "token": {
+          "type": "string",
+          "description": "The github token to use for fetching releases. Useful to exceed the unauthorised rate limit of 60 requests per hour."
+        },
+        "gitlab-token": {
+          "type": "string",
+          "description": "The GitLab token to use for fetching releases. Useful to exceed the unauthorised rate limit."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of releases to show."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many releases are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "type": {
+          "enum": [
+            "releases"
+          ]
+        }
+      }
+    },
+    "twitch-channels-widget": {
+      "required": [
+        "channels"
+      ],
+      "properties": {
+        "channels": {
+          "type": "array",
+          "description": "A list of channels to display.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many channels are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "sort-by": {
+          "enum": [
+            "viewers",
+            "live"
+          ],
+          "description": "Can be used to specify the order in which the channels are displayed."
+        },
+        "type": {
+          "enum": [
+            "twitch-channels"
+          ]
         }
       }
     },
@@ -408,46 +965,6 @@
         }
       }
     },
-    "hacker-news-widget": {
-      "properties": {
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of posts to show."
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many posts are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
-        },
-        "comments-url-template": {
-          "type": "string",
-          "pattern": ".*\\{POST-ID\\}.*",
-          "description": "Used to replace the default link for post comments. Useful if you want to use an alternative front-end.",
-          "examples": [
-            "https://www.hckrnws.com/stories/{POST-ID}"
-          ],
-          "errorMessage": "Must be a valid comments url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#comments-url-template"
-        },
-        "sort-by": {
-          "enum": [
-            "top",
-            "new",
-            "best"
-          ],
-          "description": "Used to specify the order in which the posts should get returned."
-        },
-        "extra-sort-by": {
-          "enum": [
-            "engagement"
-          ],
-          "description": "Can be used to specify an additional sort which will be applied on top of the already sorted posts."
-        },
-        "type": {
-          "enum": [
-            "hacker-news"
-          ]
-        }
-      }
-    },
     "reddit-widget": {
       "required": [
         "subreddit"
@@ -573,40 +1090,55 @@
         }
       }
     },
-    "weather-widget": {
-      "required": [
-        "location"
-      ],
+    "calendar-widget": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The name of the city and country to fetch weather information for. See https://open-meteo.com/en/docs/geocoding-api."
-        },
-        "units": {
+        "first-day-of-week": {
           "enum": [
-            "metric",
-            "imperial"
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
           ],
-          "description": "Whether to show the temperature in celsius or fahrenheit, possible values are metric or imperial."
-        },
-        "hour-format": {
-          "enum": [
-            "12h",
-            "24h"
-          ],
-          "description": "Whether to show the hours of the day in 12-hour format or 24-hour format."
-        },
-        "hide-location": {
-          "type": "boolean",
-          "description": "Optionally don't display the location name on the widget."
-        },
-        "show-area-name": {
-          "type": "boolean",
-          "description": "Whether to display the state/administrative area in the location name."
+          "description": "The day of the week that the calendar starts on."
         },
         "type": {
           "enum": [
-            "weather"
+            "calendar"
+          ]
+        }
+      }
+    },
+    "change-detection-widget": {
+      "properties": {
+        "instance-url": {
+          "type": "string",
+          "description": "The URL pointing to your instance of changedetection.io."
+        },
+        "token": {
+          "type": "string",
+          "description": "The API access token which can be found in SETTINGS > API. Optionally, you can specify this using an environment variable with the syntax ${VARIABLE_NAME}."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of watches to show."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many watches are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "watches": {
+          "type": "array",
+          "description": "By default all of the configured watches will be shown. Optionally, you can specify a list of UUIDs for the specific watches you want to have listed",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "enum": [
+            "change-detection"
           ]
         }
       }
@@ -690,6 +1222,48 @@
         }
       }
     },
+    "lobsters-widget": {
+      "properties": {
+        "instance-url": {
+          "type": "string",
+          "description": "The base URL for a lobsters instance hosted somewhere other than on lobste.rs.",
+          "examples": [
+            "https://www.journalduhacker.net/"
+          ]
+        },
+        "custom-url": {
+          "type": "string",
+          "description": "A custom URL to retrieve lobsters posts from. If this is specified, the instance-url, sort-by and tags properties are ignored."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of posts to show."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many posts are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "sort-by": {
+          "enum": [
+            "hot",
+            "new"
+          ],
+          "description": "The sort order in which posts are returned."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Limit to posts containing one of the given tags. You cannot specify a sort order when filtering by tags, it will default to hot."
+        },
+        "type": {
+          "enum": [
+            "lobsters"
+          ]
+        }
+      }
+    },
     "iframe-widget": {
       "required": [
         "source"
@@ -707,6 +1281,41 @@
         "type": {
           "enum": [
             "iframe"
+          ]
+        }
+      }
+    },
+    "repository-widget": {
+      "required": [
+        "repository"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "description": "The owner and repository name that will have their information displayed.",
+          "examples": [
+            "glanceapp/glance"
+          ]
+        },
+        "token": {
+          "type": "string",
+          "description": "The GitHub token to use for the API requests. Useful to exceed the unathorised rate limit of 60 requests per hour."
+        },
+        "pull-requests-limit": {
+          "type": "integer",
+          "description": "The maximum number of latest open pull requests to show. Set to -1 to not show any."
+        },
+        "issues-limit": {
+          "type": "integer",
+          "description": "The maximum number of latest open issues to show. Set to -1 to not show any."
+        },
+        "commits-limit": {
+          "type": "integer",
+          "description": "The maximum number of latest open issues to show. Set to -1 to not show any."
+        },
+        "type": {
+          "enum": [
+            "repository"
           ]
         }
       }
@@ -766,556 +1375,40 @@
         }
       }
     },
-    "lobsters-widget": {
-      "properties": {
-        "instance-url": {
-          "type": "string",
-          "description": "The base URL for a lobsters instance hosted somewhere other than on lobste.rs.",
-          "examples": [
-            "https://www.journalduhacker.net/"
-          ]
-        },
-        "custom-url": {
-          "type": "string",
-          "description": "A custom URL to retrieve lobsters posts from. If this is specified, the instance-url, sort-by and tags properties are ignored."
-        },
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of posts to show."
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many posts are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
-        },
-        "sort-by": {
-          "enum": [
-            "hot",
-            "new"
-          ],
-          "description": "The sort order in which posts are returned."
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Limit to posts containing one of the given tags. You cannot specify a sort order when filtering by tags, it will default to hot."
-        },
-        "type": {
-          "enum": [
-            "lobsters"
-          ]
-        }
-      }
-    },
-    "docker-containers-widget": {
-      "properties": {
-        "hide-by-default": {
-          "type": "boolean",
-          "description": "Whether to hide the containers by default. If set to true you'll have to manually add a glance.hide: false label to each container you want to display. By default all containers will be shown and if you want to hide a specific container you can add a glance.hide: true label."
-        },
-        "sock-path": {
-          "type": "string",
-          "description": "The path to the Docker socket."
-        },
-        "type": {
-          "enum": [
-            "docker-containers"
-          ]
-        }
-      }
-    },
-    "videos-widget": {
+    "weather-widget": {
       "required": [
-        "channels"
+        "location"
       ],
       "properties": {
-        "channels": {
-          "type": "array",
-          "description": "A list of channels IDs. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#channels for how to get a channel ID.",
-          "items": {
-            "type": "string"
-          }
+        "location": {
+          "type": "string",
+          "description": "The name of the city and country to fetch weather information for. See https://open-meteo.com/en/docs/geocoding-api."
         },
-        "playlists": {
-          "type": "array",
-          "description": "https://github.com/glanceapp/glance/blob/main/docs/configuration.md#channels",
-          "items": {
-            "type": "string"
-          }
-        },
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of videos to show."
-        },
-        "style": {
+        "units": {
           "enum": [
-            "horizontal-cards",
-            "vertical-list",
-            "grid-cards"
+            "metric",
+            "imperial"
           ],
-          "description": "Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-1 for examples."
+          "description": "Whether to show the temperature in celsius or fahrenheit, possible values are metric or imperial."
         },
-        "collapse-after": {
-          "type": "integer",
-          "description": "Specify the number of videos to show when using the vertical-list style before the \"SHOW MORE\" button appears."
-        },
-        "collapse-after-rows": {
-          "type": "integer",
-          "description": "Specify the number of rows to show when using the grid-cards style before the \"SHOW MORE\" button appears."
-        },
-        "include-shorts": {
-          "type": "boolean",
-          "description": "Whether to include YouTube Shorts videos in the widget."
-        },
-        "video-url-template": {
-          "type": "string",
-          "pattern": ".*\\{VIDEO-ID\\}.*",
-          "description": "Used to replace the default link for videos. Useful when you're running your own YouTube front-end.",
-          "examples": [
-            "https://invidious.your-domain.com/watch?v={VIDEO-ID}"
-          ],
-          "errorMessage": "Must be a valid video url template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#video-url-template"
-        },
-        "type": {
-          "enum": [
-            "videos"
-          ]
-        }
-      }
-    },
-    "repository-widget": {
-      "required": [
-        "repository"
-      ],
-      "properties": {
-        "repository": {
-          "type": "string",
-          "description": "The owner and repository name that will have their information displayed.",
-          "examples": [
-            "glanceapp/glance"
-          ]
-        },
-        "token": {
-          "type": "string",
-          "description": "The GitHub token to use for the API requests. Useful to exceed the unathorised rate limit of 60 requests per hour."
-        },
-        "pull-requests-limit": {
-          "type": "integer",
-          "description": "The maximum number of latest open pull requests to show. Set to -1 to not show any."
-        },
-        "issues-limit": {
-          "type": "integer",
-          "description": "The maximum number of latest open issues to show. Set to -1 to not show any."
-        },
-        "commits-limit": {
-          "type": "integer",
-          "description": "The maximum number of latest open issues to show. Set to -1 to not show any."
-        },
-        "type": {
-          "enum": [
-            "repository"
-          ]
-        }
-      }
-    },
-    "change-detection-widget": {
-      "properties": {
-        "instance-url": {
-          "type": "string",
-          "description": "The URL pointing to your instance of changedetection.io."
-        },
-        "token": {
-          "type": "string",
-          "description": "The API access token which can be found in SETTINGS > API. Optionally, you can specify this using an environment variable with the syntax ${VARIABLE_NAME}."
-        },
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of watches to show."
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many watches are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
-        },
-        "watches": {
-          "type": "array",
-          "description": "By default all of the configured watches will be shown. Optionally, you can specify a list of UUIDs for the specific watches you want to have listed",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "enum": [
-            "change-detection"
-          ]
-        }
-      }
-    },
-    "twitch-channels-widget": {
-      "required": [
-        "channels"
-      ],
-      "properties": {
-        "channels": {
-          "type": "array",
-          "description": "A list of channels to display.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many channels are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
-        },
-        "sort-by": {
-          "enum": [
-            "viewers",
-            "live"
-          ],
-          "description": "Can be used to specify the order in which the channels are displayed."
-        },
-        "type": {
-          "enum": [
-            "twitch-channels"
-          ]
-        }
-      }
-    },
-    "markets-widget": {
-      "required": [
-        "markets"
-      ],
-      "properties": {
-        "markets": {
-          "type": "array",
-          "description": "An array of markets for which to display information about.",
-          "items": {
-            "type": "object",
-            "required": [
-              "symbol"
-            ],
-            "properties": {
-              "symbol": {
-                "type": "string",
-                "description": "The symbol, as seen in Yahoo Finance."
-              },
-              "name": {
-                "type": "string",
-                "description": "The name that will be displayed under the symbol."
-              },
-              "symbol-link": {
-                "type": "string",
-                "description": "The link to go to when clicking on the symbol."
-              },
-              "chart-link": {
-                "type": "string",
-                "description": "The link to go to when clicking on the chart."
-              }
-            }
-          }
-        },
-        "sort-by": {
-          "enum": [
-            "change",
-            "absolute-change"
-          ],
-          "description": "By default the markets are displayed in the order they were defined. You can customize their ordering by setting the sort-by property to change for descending order based on the stock's percentage change (e.g. 1% would be sorted higher than -1%) or absolute-change for descending order based on the stock's absolute price change (e.g. -1% would be sorted higher than +0.5%)."
-        },
-        "chart-link-template": {
-          "type": "string",
-          "pattern": ".*\\{SYMBOL\\}.*",
-          "description": "A template for the link to go to when clicking on the chart that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a chart-link property.",
-          "examples": [
-            "https://www.tradingview.com/chart/?symbol={SYMBOL}"
-          ],
-          "errorMessage": "Must be a valid chart link template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#chart-link-template"
-        },
-        "symbol-link-template": {
-          "type": "string",
-          "pattern": ".*\\{SYMBOL\\}.*",
-          "description": "A template for the link to go to when clicking on the symbol that will be applied to all markets. The value {SYMBOL} will be replaced with the symbol of the market. You can override this on a per-market basis by specifying a symbol-link property.",
-          "examples": [
-            "https://www.google.com/search?tbm=nws&q={SYMBOL}"
-          ],
-          "errorMessage": "Must be a valid symbol link template. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#symbol-link-template"
-        },
-        "type": {
-          "enum": [
-            "markets"
-          ]
-        }
-      }
-    },
-    "server-stats-widget": {
-      "properties": {
-        "servers": {
-          "type": "array",
-          "description": "If not provided it will display the statistics of the server Glance is running on.",
-          "items": {
-            "type": "object",
-            "required": [
-              "type"
-            ],
-            "properties": {
-              "type": {
-                "enum": [
-                  "local",
-                  "remote"
-                ],
-                "description": "Whether to display statistics for the local server or a remote server."
-              },
-              "name": {
-                "type": "string",
-                "description": "The name of the server which will be displayed on the widget. If not provided it will default to the server's hostname."
-              },
-              "hide-swap": {
-                "type": "boolean",
-                "description": "Whether to hide the swap usage."
-              },
-              "cpu-temp-sensor": {
-                "type": "string",
-                "description": "The name of the sensor to use for the CPU temperature. When not provided the widget will attempt to find the correct one, if it fails to do so the temperature will not be displayed. To view the available sensors you can use sensors command"
-              },
-              "hide-mountpoints-by-default": {
-                "type": "boolean",
-                "description": "If set to true you'll have to manually make each mountpoint visible by adding a hide: false property."
-              },
-              "mountpoints": {
-                "type": "object",
-                "description": "A map of mountpoints to display disk usage for. The key is the path to the mountpoint and the value is an object with optional properties.",
-                "additionalProperties": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "The name of the mountpoint which will be displayed on the widget. If not provided it will default to the mountpoint's path."
-                    },
-                    "hide": {
-                      "type": "boolean",
-                      "description": "Whether to hide this mountpoint from the widget."
-                    }
-                  }
-                }
-              },
-              "url": {
-                "type": "string",
-                "description": "The URL and port of the server to fetch the statistics from."
-              },
-              "token": {
-                "type": "string",
-                "description": "The authentication token to use when fetching the statistics."
-              },
-              "timeout": {
-                "type": "string",
-                "pattern": "^\\d+[smhd]$",
-                "description": "The maximum time to wait for a response from the server. The value is a string and must be a number followed by one of s, m, h, d.",
-                "examples": [
-                  "10s"
-                ],
-                "errorMessage": "Must be a valid time duration."
-              }
-            }
-          }
-        },
-        "type": {
-          "enum": [
-            "server-stats"
-          ]
-        }
-      }
-    },
-    "clock-widget": {
-      "properties": {
         "hour-format": {
           "enum": [
             "12h",
             "24h"
           ],
-          "description": "Whether to show the time in 12 or 24 hour format."
+          "description": "Whether to show the hours of the day in 12-hour format or 24-hour format."
         },
-        "timezones": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "timezone"
-            ],
-            "properties": {
-              "timezone": {
-                "type": "string",
-                "description": "A timezone identifier such as Europe/London, America/New_York, etc. The full list of available identifiers can be found here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones."
-              },
-              "label": {
-                "type": "string",
-                "description": "Optionally, override the display value for the timezone to something more meaningful such as \"Home\", \"Work\" or anything else."
-              }
-            }
-          }
-        },
-        "type": {
-          "enum": [
-            "clock"
-          ]
-        }
-      }
-    },
-    "split-column-widget": {
-      "required": [
-        "widgets"
-      ],
-      "properties": {
-        "max-columns": {
-          "type": "integer",
-          "minimum": 2,
-          "description": "The maximum number of columns to split the widgets into."
-        },
-        "widgets": {
-          "type": "array",
-          "minItems": 2,
-          "description": "A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.",
-          "items": {
-            "$ref": "#/definitions/widget"
-          }
-        },
-        "type": {
-          "enum": [
-            "split-column"
-          ]
-        }
-      }
-    },
-    "extension-widget": {
-      "required": [
-        "url"
-      ],
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "The URL of the extension. Note that the query gets stripped from this URL and the one defined by parameters gets used instead."
-        },
-        "fallback-content-type": {
-          "enum": [
-            "html"
-          ],
-          "description": "Optionally specify the fallback content type of the extension if the URL does not return a valid Widget-Content-Type header. Currently the only supported value for this property is html."
-        },
-        "allow-potentially-dangerous-html": {
+        "hide-location": {
           "type": "boolean",
-          "description": "Whether to allow the extension to display HTML. Must be enabled for html to render. Ensure you are aware the extension url you are using is safe."
+          "description": "Optionally don't display the location name on the widget."
         },
-        "parameters": {
-          "type": "object",
-          "additionalProperties": true,
-          "examples": [
-            "key: value"
-          ],
-          "description": "A list of keys and values that will be sent to the extension as query paramters."
-        },
-        "type": {
-          "enum": [
-            "extension"
-          ]
-        }
-      }
-    },
-    "html-widget": {
-      "required": [
-        "source"
-      ],
-      "properties": {
-        "source": {
-          "type": "string",
-          "description": "The HTML source code to render. Javascript should be included in the document head."
-        },
-        "type": {
-          "enum": [
-            "html"
-          ]
-        }
-      }
-    },
-    "calendar-widget": {
-      "properties": {
-        "first-day-of-week": {
-          "enum": [
-            "monday",
-            "tuesday",
-            "wednesday",
-            "thursday",
-            "friday",
-            "saturday",
-            "sunday"
-          ],
-          "description": "The day of the week that the calendar starts on."
-        },
-        "type": {
-          "enum": [
-            "calendar"
-          ]
-        }
-      }
-    },
-    "releases-widget": {
-      "required": [
-        "repositories"
-      ],
-      "properties": {
-        "repositories": {
-          "type": "array",
-          "description": "A list of repositores to fetch the latest release for. Only the name/repo is required, not the full URL. A prefix can be specified for repositories hosted elsewhere such as GitLab, Codeberg and Docker Hub. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#repositories",
-          "examples": [
-            "dockerhub:glanceapp/glance"
-          ],
-          "items": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "required": [
-                  "repository"
-                ],
-                "properties": {
-                  "repository": {
-                    "type": "string",
-                    "description": "The repository to fetch with prereleases enabled. Only available for Github repositories.",
-                    "examples": [
-                      "glanceapp/glance"
-                    ]
-                  },
-                  "include-prereleases": {
-                    "type": "boolean",
-                    "description": "Whether to include prereleases in the list of releases. Only available for Github repositories."
-                  }
-                }
-              }
-            ]
-          }
-        },
-        "show-source-icon": {
+        "show-area-name": {
           "type": "boolean",
-          "description": "Shows an icon of the source (GitHub/GitLab/Codeberg/Docker Hub) next to the repository name when set to true."
-        },
-        "token": {
-          "type": "string",
-          "description": "The github token to use for fetching releases. Useful to exceed the unauthorised rate limit of 60 requests per hour."
-        },
-        "gitlab-token": {
-          "type": "string",
-          "description": "The GitLab token to use for fetching releases. Useful to exceed the unauthorised rate limit."
-        },
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of releases to show."
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many releases are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+          "description": "Whether to display the state/administrative area in the location name."
         },
         "type": {
           "enum": [
-            "releases"
+            "weather"
           ]
         }
       }
@@ -1356,6 +1449,97 @@
         "type": {
           "enum": [
             "group"
+          ]
+        }
+      }
+    },
+    "rss-widget": {
+      "required": [
+        "feeds"
+      ],
+      "properties": {
+        "style": {
+          "enum": [
+            "vertical-list",
+            "detailed-list",
+            "horizontal-cards",
+            "horizontal-cards-2"
+          ],
+          "description": "Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style for examples."
+        },
+        "feeds": {
+          "type": "array",
+          "description": "An array of RSS/atom feeds. The title can optionally be changed.",
+          "items": {
+            "type": "object",
+            "required": [
+              "url"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The URL of the RSS feed."
+              },
+              "title": {
+                "type": "string",
+                "description": "The title of the feed. If not provided, Glance will try to fetch the title from the feed."
+              },
+              "hide-categories": {
+                "type": "boolean",
+                "description": "When set to true, hides the categories of the articles."
+              },
+              "hide-description": {
+                "type": "boolean",
+                "description": "When set to true, hides the description of the articles."
+              },
+              "limit": {
+                "type": "integer",
+                "description": "The maximum number of articles to show from that specific feed. Useful if you have a feed which posts a lot of articles frequently and you want to prevent it from excessively pushing down articles from other feeds."
+              },
+              "item-link-prefix": {
+                "type": "string",
+                "description": "If an RSS feed isn't returning item links with a base domain and Glance has failed to automatically detect the correct domain you can manually add a prefix to each link with this property."
+              },
+              "headers": {
+                "type": "object",
+                "description": "Optionally specify the headers that will be sent with the request.",
+                "examples": [
+                  "x-api-key: your-api-key"
+                ],
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "thumbnail-height": {
+          "type": "number",
+          "description": "Used to modify the height of the thumbnails. Works only when the style is set to horizontal-cards. The default value is 10 and the units are rem, if you want to for example double the height of the thumbnails you can set it to 20."
+        },
+        "card-height": {
+          "type": "number",
+          "description": "Used to modify the height of cards when using the horizontal-cards-2 style. The default value is 27 and the units are rem."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "The maximum number of articles to show."
+        },
+        "preserve-order": {
+          "type": "boolean",
+          "description": "When set to true, the order of the articles will be preserved as they are in the feeds. Useful if a feed uses its own sorting order which denotes the importance of the articles. If you use this property while having a lot of feeds, it's recommended to set a limit to each individual feed since if the first defined feed has 15 articles, the articles from the second feed will start after the 15th article in the list."
+        },
+        "single-line-titles": {
+          "type": "boolean",
+          "description": "When set to true, truncates the title of each post if it exceeds one line. Only applies when the style is set to vertical-list."
+        },
+        "collapse-after": {
+          "type": "integer",
+          "description": "How many articles are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
+        },
+        "type": {
+          "enum": [
+            "rss"
           ]
         }
       }
@@ -1453,190 +1637,6 @@
         }
       }
     },
-    "rss-widget": {
-      "required": [
-        "feeds"
-      ],
-      "properties": {
-        "style": {
-          "enum": [
-            "vertical-list",
-            "detailed-list",
-            "horizontal-cards",
-            "horizontal-cards-2"
-          ],
-          "description": "Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style for examples."
-        },
-        "feeds": {
-          "type": "array",
-          "description": "An array of RSS/atom feeds. The title can optionally be changed.",
-          "items": {
-            "type": "object",
-            "required": [
-              "url"
-            ],
-            "properties": {
-              "url": {
-                "type": "string",
-                "description": "The URL of the RSS feed."
-              },
-              "title": {
-                "type": "string",
-                "description": "The title of the feed. If not provided, Glance will try to fetch the title from the feed."
-              },
-              "hide-categories": {
-                "type": "boolean",
-                "description": "When set to true, hides the categories of the articles."
-              },
-              "hide-description": {
-                "type": "boolean",
-                "description": "When set to true, hides the description of the articles."
-              },
-              "limit": {
-                "type": "integer",
-                "description": "The maximum number of articles to show from that specific feed. Useful if you have a feed which posts a lot of articles frequently and you want to prevent it from excessively pushing down articles from other feeds."
-              },
-              "item-link-prefix": {
-                "type": "string",
-                "description": "If an RSS feed isn't returning item links with a base domain and Glance has failed to automatically detect the correct domain you can manually add a prefix to each link with this property."
-              },
-              "headers": {
-                "type": "object",
-                "description": "Optionally specify the headers that will be sent with the request.",
-                "examples": [
-                  "x-api-key: your-api-key"
-                ],
-                "additionalProperties": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "thumbnail-height": {
-          "type": "number",
-          "description": "Used to modify the height of the thumbnails. Works only when the style is set to horizontal-cards. The default value is 10 and the units are rem, if you want to for example double the height of the thumbnails you can set it to 20."
-        },
-        "card-height": {
-          "type": "number",
-          "description": "Used to modify the height of cards when using the horizontal-cards-2 style. The default value is 27 and the units are rem."
-        },
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of articles to show."
-        },
-        "preserve-order": {
-          "type": "boolean",
-          "description": "When set to true, the order of the articles will be preserved as they are in the feeds. Useful if a feed uses its own sorting order which denotes the importance of the articles. If you use this property while having a lot of feeds, it's recommended to set a limit to each individual feed since if the first defined feed has 15 articles, the articles from the second feed will start after the 15th article in the list."
-        },
-        "single-line-titles": {
-          "type": "boolean",
-          "description": "When set to true, truncates the title of each post if it exceeds one line. Only applies when the style is set to vertical-list."
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many articles are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
-        },
-        "type": {
-          "enum": [
-            "rss"
-          ]
-        }
-      }
-    },
-    "monitor-widget": {
-      "required": [
-        "sites"
-      ],
-      "properties": {
-        "show-failing-only": {
-          "type": "boolean",
-          "description": "Shows only a list of failing sites when set to true."
-        },
-        "style": {
-          "enum": [
-            "compact"
-          ],
-          "description": "Used to change the appearance of the widget. See https://github.com/glanceapp/glance/blob/main/docs/configuration.md#style-3 for examples."
-        },
-        "sites": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "title",
-              "url"
-            ],
-            "properties": {
-              "title": {
-                "type": "string",
-                "description": "The title used to indicate the site."
-              },
-              "url": {
-                "type": "string",
-                "description": "The public facing URL of a monitored service, the user will be redirected here. If check-url is not specified, this is used as the status check."
-              },
-              "check-url": {
-                "type": "string",
-                "description": "The URL which will be requested and its response will determine the status of the site. If not specified, the url property is used."
-              },
-              "error-url": {
-                "type": "string",
-                "description": "If the monitored service returns an error, the user will be redirected here. If not specified, the url property is used."
-              },
-              "icon": {
-                "type": "string",
-                "description": "Optional URL to an image which will be used as the icon for the site. Can be an external URL or internal via server configured assets. You can also directly use Simple Icons via a si: prefix or Dashboard Icons via a di: prefix:"
-              },
-              "allow-insecure": {
-                "type": "boolean",
-                "description": "Whether to ignore invalid/self-signed certificates."
-              },
-              "same-tab": {
-                "type": "boolean",
-                "description": "Whether to open the link in the same or a new tab."
-              },
-              "alt-status-codes": {
-                "type": "array",
-                "description": "Status codes other than 200 that you want to return \"OK\".",
-                "items": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        },
-        "type": {
-          "enum": [
-            "monitor"
-          ]
-        }
-      }
-    },
-    "twitch-top-games-widget": {
-      "properties": {
-        "exclude": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of categories that will never be shown. You must provide the slug found by clicking on the category and looking at the URL."
-        },
-        "limit": {
-          "type": "integer",
-          "description": "The maximum number of games to show."
-        },
-        "collapse-after": {
-          "type": "integer",
-          "description": "How many games are visible before the \"SHOW MORE\" button appears. Set to -1 to never collapse."
-        },
-        "type": {
-          "enum": [
-            "twitch-top-games"
-          ]
-        }
-      }
-    },
     "widget": {
       "allOf": [
         {
@@ -1645,28 +1645,25 @@
         {
           "oneOf": [
             {
-              "$ref": "#/definitions/custom-api-widget"
+              "$ref": "#/definitions/markets-widget"
+            },
+            {
+              "$ref": "#/definitions/monitor-widget"
             },
             {
               "$ref": "#/definitions/hacker-news-widget"
             },
             {
-              "$ref": "#/definitions/reddit-widget"
+              "$ref": "#/definitions/clock-widget"
             },
             {
-              "$ref": "#/definitions/weather-widget"
+              "$ref": "#/definitions/html-widget"
             },
             {
-              "$ref": "#/definitions/search-widget"
+              "$ref": "#/definitions/twitch-top-games-widget"
             },
             {
-              "$ref": "#/definitions/iframe-widget"
-            },
-            {
-              "$ref": "#/definitions/dns-stats-widget"
-            },
-            {
-              "$ref": "#/definitions/lobsters-widget"
+              "$ref": "#/definitions/split-column-widget"
             },
             {
               "$ref": "#/definitions/docker-containers-widget"
@@ -1675,52 +1672,55 @@
               "$ref": "#/definitions/videos-widget"
             },
             {
-              "$ref": "#/definitions/repository-widget"
-            },
-            {
-              "$ref": "#/definitions/change-detection-widget"
-            },
-            {
-              "$ref": "#/definitions/twitch-channels-widget"
-            },
-            {
-              "$ref": "#/definitions/markets-widget"
+              "$ref": "#/definitions/extension-widget"
             },
             {
               "$ref": "#/definitions/server-stats-widget"
             },
             {
-              "$ref": "#/definitions/clock-widget"
+              "$ref": "#/definitions/releases-widget"
             },
             {
-              "$ref": "#/definitions/split-column-widget"
+              "$ref": "#/definitions/twitch-channels-widget"
             },
             {
-              "$ref": "#/definitions/extension-widget"
+              "$ref": "#/definitions/custom-api-widget"
             },
             {
-              "$ref": "#/definitions/html-widget"
+              "$ref": "#/definitions/reddit-widget"
             },
             {
               "$ref": "#/definitions/calendar-widget"
             },
             {
-              "$ref": "#/definitions/releases-widget"
+              "$ref": "#/definitions/change-detection-widget"
+            },
+            {
+              "$ref": "#/definitions/search-widget"
+            },
+            {
+              "$ref": "#/definitions/lobsters-widget"
+            },
+            {
+              "$ref": "#/definitions/iframe-widget"
+            },
+            {
+              "$ref": "#/definitions/repository-widget"
+            },
+            {
+              "$ref": "#/definitions/dns-stats-widget"
+            },
+            {
+              "$ref": "#/definitions/weather-widget"
             },
             {
               "$ref": "#/definitions/group-widget"
             },
             {
-              "$ref": "#/definitions/bookmarks-widget"
-            },
-            {
               "$ref": "#/definitions/rss-widget"
             },
             {
-              "$ref": "#/definitions/monitor-widget"
-            },
-            {
-              "$ref": "#/definitions/twitch-top-games-widget"
+              "$ref": "#/definitions/bookmarks-widget"
             }
           ]
         }
