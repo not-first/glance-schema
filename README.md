@@ -2,7 +2,7 @@
 *A JSON schema detailing the [Glance](https://github.com/glanceapp/glance) config file.*
 
 > [!WARNING]
-> Currently represents version: v0.8.4. For newer versions of Glance, splitting up the config file is recommended. A schema is unable to function cross-files and cannot be deterministic due to the flexible nature of Glance's `$include`. Reach out if you have any knowledge on how to utilise the benefits of a schema in this environment.
+> Currently represents version: v0.8.4. For newer versions of Glance, splitting up large config files using [`$include`](https://github.com/glanceapp/glance/blob/main/docs/configuration.md?tab=readme-ov-file#including-other-config-files) is recommended. This schema cannot currently work to validate split config files, but support is planned.
 
 ## Usage
 For custom usage, the schema link can be found at https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json.
