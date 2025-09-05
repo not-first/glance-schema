@@ -43,7 +43,7 @@ Remove this `schema.json` file from your commit, as it is built by a Github Acti
 
 #### Script Functionality
 1. Combines all the top-level properties into the base schema template (branding, pages etc)
-2. Loads the widget base properties, creates a specific schema combining this with every widget file
+2. Loads the widget base properties and creates a specific schema for each widget by combining it with every widget file
 3. Creates a definition for each widget and reference it in the schema
 4. Output schema to `schema.json`
 
