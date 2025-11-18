@@ -33,7 +33,11 @@ Any help in maintaining the schema is appreciated. This may include:
 In order to make building the schema easier, it is split into a file per each base property (e.g server, branding, pages) and widgets. A script is then run to build a singular JSON file for the schema.
 
 #### Local Testing
-To test locally, install the packages `alive-progress` and `pyyaml` in a python environment and run the script in `scripts/generate-schema.py`. It will generate a `schema.json` at the root of the repo. Then use:
+To test locally, run the schema generation script using `uv`:
+```bash
+uv run scripts/generate-schema.py
+```
+This will generate a `schema.json` at the root of the repo. Then use:
 ```
 yaml-language-server: $schema=file://{PATH_TO_YOUR_SCHEMA.JSON}
 ```

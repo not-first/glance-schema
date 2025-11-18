@@ -1,0 +1,10 @@
+[project]
+name = "glance-schema"
+version = "0.1.0"
+description = "A JSON schema detailing the Glance config file."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "alive-progress>=3.3.0",
+    "pyyaml>=6.0.3",
+]
