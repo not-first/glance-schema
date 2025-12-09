@@ -150,10 +150,7 @@ def main():
 
     # inject $include support globally with oneOf wrapping
     def wrap_with_include_support(schema_obj, path=""):
-        """
-        Wraps object schemas with oneOf to allow either the original schema or $include.
-        Avoids wrapping the include definition itself and simple types.
-        """
+        # base case: if not a dict, return as is
         if not isinstance(schema_obj, dict):
             return schema_obj
 
@@ -189,8 +186,17 @@ def main():
 
     # wrap definitions (except include itself and widget-base which is only used internally)
     for def_name in list(combined_schema["definitions"].keys()):
-        # skip include, widget-base, and widget (widget has custom include support)
-        if def_name in ("include", "widget-base", "widget"):
+        # skip include, widget-base, widget, page, widget-item, and page-item
+        # widget and page are arrays that already have their items wrapped
+        # widget-item and page-item are internal definitions that get wrapped when creating widget/page
+        if def_name in (
+            "include",
+            "widget-base",
+            "widget",
+            "page",
+            "widget-item",
+            "page-item",
+        ):
             continue
 
         def_schema = combined_schema["definitions"][def_name]
