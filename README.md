@@ -4,6 +4,9 @@
 > [!NOTE]
 > Currently represents version: v0.8.4. Now supports validation of split config files using [`$include`](https://github.com/glanceapp/glance/blob/main/docs/configuration.md?tab=readme-ov-file#including-other-config-files)!
 
+> [!WARNING]
+> Although split config files can now be validated using the new exposed definitions, full schema support for $include is still being ironed out. Expect some errors here and there, even though your config file may be correct!
+
 ## Usage
 The schema is available at: `https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json`
 
