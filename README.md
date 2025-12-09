@@ -34,22 +34,6 @@ Widget files should **always be arrays**, even for a single widget (this is the 
   location: New York, United States
 ```
 
-For multiple widgets in one file:
-
-```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/widget
-
-- type: rss
-  title: Tech News
-  feeds:
-    - url: https://example.com/tech/feed
-
-- type: rss
-  title: World News
-  feeds:
-    - url: https://example.com/world/feed
-```
-
 #### Page Files
 
 Page files should **also be arrays**, even for a single page:
