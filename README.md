@@ -25,23 +25,21 @@ For your main `glance.yml` configuration file:
 
 The schema now supports validating split config files using the `$include` directive. Here are examples for common use cases:
 
-#### Single Widget Files
+#### Widget Files
 
-For files containing a single widget to be included (e.g., `widgets/weather.yml`):
+Widget files should **always be arrays**, even for a single widget (this is the official Glance recommendation):
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/widget
 
-type: weather
-location: New York, United States
+- type: weather
+  location: New York, United States
 ```
 
-#### Multiple Widget Files (Array)
-
-For files containing multiple widgets (e.g., `widgets/rss.yml`):
+For multiple widgets in one file:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/widget-array
+# yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/widget
 
 - type: rss
   title: Tech News
@@ -54,9 +52,9 @@ For files containing multiple widgets (e.g., `widgets/rss.yml`):
     - url: https://example.com/world/feed
 ```
 
-#### Single Page Files
+#### Page Files
 
-For files containing a single page (e.g., `pages/home.yml`):
+Page files should be **single page objects** (NOT arrays):
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/page
@@ -67,27 +65,6 @@ columns:
     widgets:
       - type: rss
         title: News
-```
-
-#### Multiple Page Files (Array)
-
-For files containing multiple pages (e.g., `pages/dashboards.yml`):
-
-```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/page-array
-
-- name: Dashboard 1
-  columns:
-    - size: full
-      widgets:
-        - type: monitor
-          title: System Monitor
-
-- name: Dashboard 2
-  columns:
-    - size: full
-      widgets:
-        - type: server-stats
 ```
 
 #### Using $include in Your Main Config
@@ -101,20 +78,16 @@ server:
   port: 8080
 
 pages:
-  - $include: pages/home.yml          # Single page
-  $include: pages/dashboards.yml      # Multiple pages
+  - $include: pages/home.yml      # Single page object
+  - $include: pages/dashboard.yml # Single page object
   - name: Inline Page
     columns:
       - size: full
         widgets:
-          - $include: widgets/weather.yml  # Single widget
-          $include: widgets/rss.yml        # Multiple widgets
-          - type: clock                    # Inline widget
+          $include: widgets/weather.yml  # Widget array (even if 1 item)
+          $include: widgets/rss.yml      # Widget array
+          - type: clock                  # Inline widget
 ```
-
-**Important:** How you use `$include` depends on the file's content:
-- **Single item files** (using `#/definitions/widget` or `#/definitions/page`): Use `- $include:` with a dash, because the file contains one object that becomes an array item
-- **Array files** (using `#/definitions/widget-array` or `#/definitions/page-array`): Use `$include:` without a dash, because the file already contains array items with dashes that will be merged in
 
 ### Automatic Schema Application for Folders
 
@@ -132,39 +105,10 @@ Add this to your `.vscode/settings.json`:
 }
 ```
 
-**Note:** The above configuration uses the singular `widget` and `page` schemas. If your files typically contain arrays of multiple widgets/pages, you can use `widget-array` and `page-array` instead:
-
-```json
-{
-  "yaml.schemas": {
-    "https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json": ["glance.yml"],
-    "https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/widget-array": ["widgets/*.yml"],
-    "https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/page-array": ["pages/*.yml"]
-  }
-}
-```
-
 This configuration:
 - Applies the main schema to `glance.yml`
-- Applies the widget/widget-array schema to all `.yml` files in the `widgets/` folder
-- Applies the page/page-array schema to all `.yml` files in the `pages/` folder
-
-#### Recommended Project Structure
-
-```
-your-project/
-├── glance.yml           # Main config file
-├── .vscode/
-│   └── settings.json    # VS Code schema configuration
-├── pages/
-│   ├── home.yml         # Single page
-│   ├── dashboard.yml    # Single page
-│   └── monitoring.yml   # Single page or multiple pages
-└── widgets/
-    ├── rss.yml          # Single widget or array of widgets
-    ├── weather.yml      # Typically a single widget
-    └── stats.yml        # Single widget or array of widgets
-```
+- Applies the widget schema (array) to all `.yml` files in the `widgets/` folder
+- Applies the page schema (single object) to all `.yml` files in the `pages/` folder
 
 
 ## Known Limitations

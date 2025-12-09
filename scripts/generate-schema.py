@@ -104,31 +104,43 @@ def main():
     # add include support to widget oneOf (without widget-base requirements)
     widget_refs.append({"$ref": "#/definitions/include"})
 
-    # create the single widget definition (primary consumer-facing definition)
-    combined_schema["definitions"]["widget"] = {"oneOf": widget_refs}
+    # create the single widget-item definition (internal use)
+    combined_schema["definitions"]["widget-item"] = {"oneOf": widget_refs}
 
-    # create the widget-array definition for include files with multiple widgets
-    combined_schema["definitions"]["widget-array"] = {
+    # create the widget definition as an array (primary consumer-facing definition)
+    # widgets are always defined as arrays in separate files, even for a single widget
+    combined_schema["definitions"]["widget"] = {
         "type": "array",
-        "items": {"$ref": "#/definitions/widget"},
+        "items": {"$ref": "#/definitions/widget-item"},
     }
 
-    # extract and expose page schema
+    # extract and expose page schema (single page object, NOT an array)
     if "pages" in combined_schema["properties"]:
         pages_schema = combined_schema["properties"]["pages"]
         if "items" in pages_schema and isinstance(pages_schema["items"], dict):
-            # extract the page schema (primary consumer-facing definition)
+            # extract the page schema as the primary consumer-facing definition
+            # pages are included as single objects, not arrays
             combined_schema["definitions"]["page"] = pages_schema["items"]
-            # update pages to reference the definition
+            # update pages array to reference the definition
             combined_schema["properties"]["pages"]["items"] = {
                 "$ref": "#/definitions/page"
             }
 
-            # create the page-array definition for include files with multiple pages
-            combined_schema["definitions"]["page-array"] = {
-                "type": "array",
-                "items": {"$ref": "#/definitions/page"},
-            }
+    # update internal widget references to use widget-item
+    def update_widget_refs(obj):
+        """Recursively update $ref to widget to use widget-item instead"""
+        if isinstance(obj, dict):
+            if obj.get("$ref") == "#/definitions/widget":
+                obj["$ref"] = "#/definitions/widget-item"
+            for value in obj.values():
+                update_widget_refs(value)
+        elif isinstance(obj, list):
+            for item in obj:
+                update_widget_refs(item)
+
+    # Apply widget reference updates to properties and definitions
+    update_widget_refs(combined_schema["properties"])
+    update_widget_refs(combined_schema["definitions"])
 
     # inject $include support globally with oneOf wrapping
     def wrap_with_include_support(schema_obj, path=""):

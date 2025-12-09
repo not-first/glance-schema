@@ -27,10 +27,9 @@ at the top of any `glance.yml` to test the locally generated version of the sche
 1. Combines all the top-level properties into the base schema template (branding, pages, server, etc.)
 2. Loads the widget base properties and creates a specific schema for each widget by combining it with every widget file
 3. Creates definitions for:
-   - `widget`: A single widget object (with `$include` support)
-   - `widget-array`: An array of widgets (for include files with multiple widgets)
-   - `page`: A single page object (with `$include` support)
-   - `page-array`: An array of pages (for include files with multiple pages)
+   - `widget-item`: Internal single widget object definition
+   - `widget`: An array of widgets (primary consumer-facing definition for widget files)
+   - `page`: A single page object (primary consumer-facing definition for page files)
    - `include`: The `$include` directive definition
 4. Injects `$include` support globally by wrapping definitions with `oneOf` to allow either the original schema or an include directive
 5. Outputs the complete schema to `schema.json`
@@ -38,11 +37,10 @@ at the top of any `glance.yml` to test the locally generated version of the sche
 #### Schema Definitions for Split Config Files
 The schema supports Glance's `$include` directive for splitting configurations:
 
-- **`#/definitions/widget`**: For single widget files (one widget object without array syntax)
-- **`#/definitions/widget-array`**: For files containing multiple widgets (array with dashes)
-- **`#/definitions/page`**: For single page files (one page object without array syntax)
-- **`#/definitions/page-array`**: For files containing multiple pages (array with dashes)
+- **`#/definitions/widget`**: For widget include files (always arrays, even for single widgets - official Glance recommendation)
+- **`#/definitions/page`**: For page include files (single page objects, NOT arrays)
+- **`#/definitions/widget-item`**: Internal definition for individual widget objects (used within arrays)
 - **`#/definitions/include`**: The `$include` directive itself (injected into all definitions)
 
-When adding or modifying widgets, the script automatically generates both singular and array definitions.
+When adding or modifying widgets, the script automatically generates the appropriate definitions and maintains consistency between singular and array usage.
 
