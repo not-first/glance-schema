@@ -9,7 +9,7 @@
         "columns"
       ],
       "items": {
-        "$ref": "#/definitions/page"
+        "$ref": "#/definitions/page-item"
       }
     },
     "server": {
@@ -2343,90 +2343,89 @@
         "$ref": "#/definitions/widget-item"
       }
     },
-    "page": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The name of the page which gets shown in the navigation bar."
-            },
-            "slug": {
-              "type": "string",
-              "description": "The URL friendly version of the title which is used to access the page. For example if the title of the page is \"RSS Feeds\" you can make the page accessible via localhost:8080/feeds by setting the slug to feeds. If not defined, it will automatically be generated from the title."
-            },
-            "width": {
-              "enum": [
-                "slim",
-                "wide"
-              ],
-              "description": "The maximum width of the page on desktop. Default is 1600px, slim is 1100px and wide is 1920px. A slime page can only have 2 columns."
-            },
-            "center-vertically": {
-              "type": "boolean",
-              "description": "When set to true, vertically centers the content on the page. Has no effect if the content is taller than the height of the viewport."
-            },
-            "hide-desktop-navigation": {
-              "type": "boolean",
-              "description": "Whether to show the navigation links at the top of the page on desktop."
-            },
-            "expand-mobile-page-navigation": {
-              "type": "boolean",
-              "description": "Whether the mobile page navigation should be expanded by default."
-            },
-            "show-mobile-header": {
-              "type": "boolean",
-              "description": "Whether to show a header displaying the name of the page on mobile. The header purposefully has a lot of vertical whitespace in order to push the content down and make it easier to reach on tall devices."
-            },
-            "desktop-navigation-width": {
-              "enum": [
-                "default",
-                "slim",
-                "wide"
-              ],
-              "description": "The width of the navigation bar on desktop. Can be 'default', 'slim', or 'wide'.\nIf not set, inherits from the 'width' property.\n"
-            },
-            "columns": {
-              "type": "array",
-              "description": "A list of columns to display on the page.",
-              "items": {
-                "type": "object",
-                "required": [
-                  "size"
+    "page-item": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the page which gets shown in the navigation bar."
+        },
+        "slug": {
+          "type": "string",
+          "description": "The URL friendly version of the title which is used to access the page. For example if the title of the page is \"RSS Feeds\" you can make the page accessible via localhost:8080/feeds by setting the slug to feeds. If not defined, it will automatically be generated from the title."
+        },
+        "width": {
+          "enum": [
+            "slim",
+            "wide"
+          ],
+          "description": "The maximum width of the page on desktop. Default is 1600px, slim is 1100px and wide is 1920px. A slime page can only have 2 columns."
+        },
+        "center-vertically": {
+          "type": "boolean",
+          "description": "When set to true, vertically centers the content on the page. Has no effect if the content is taller than the height of the viewport."
+        },
+        "hide-desktop-navigation": {
+          "type": "boolean",
+          "description": "Whether to show the navigation links at the top of the page on desktop."
+        },
+        "expand-mobile-page-navigation": {
+          "type": "boolean",
+          "description": "Whether the mobile page navigation should be expanded by default."
+        },
+        "show-mobile-header": {
+          "type": "boolean",
+          "description": "Whether to show a header displaying the name of the page on mobile. The header purposefully has a lot of vertical whitespace in order to push the content down and make it easier to reach on tall devices."
+        },
+        "desktop-navigation-width": {
+          "enum": [
+            "default",
+            "slim",
+            "wide"
+          ],
+          "description": "The width of the navigation bar on desktop. Can be 'default', 'slim', or 'wide'.\nIf not set, inherits from the 'width' property.\n"
+        },
+        "columns": {
+          "type": "array",
+          "description": "A list of columns to display on the page.",
+          "items": {
+            "type": "object",
+            "required": [
+              "size"
+            ],
+            "properties": {
+              "size": {
+                "enum": [
+                  "full",
+                  "small"
                 ],
-                "properties": {
-                  "size": {
-                    "enum": [
-                      "full",
-                      "small"
-                    ],
-                    "description": "The size of the column. A small column takes up a fixed amount of width (300px) and a full column takes up the all of the remaining width. A page can have at most two full columns."
-                  },
-                  "widgets": {
-                    "type": "array",
-                    "additionalItems": false,
-                    "description": "A list of widgets to display in the column.",
-                    "items": {
-                      "$ref": "#/definitions/widget-item"
-                    }
-                  }
+                "description": "The size of the column. A small column takes up a fixed amount of width (300px) and a full column takes up the all of the remaining width. A page can have at most two full columns."
+              },
+              "widgets": {
+                "type": "array",
+                "additionalItems": false,
+                "description": "A list of widgets to display in the column.",
+                "items": {
+                  "$ref": "#/definitions/widget-item"
                 }
-              }
-            },
-            "head-widgets": {
-              "type": "array",
-              "description": "An array of widgets that will appear above the columns on this page. Each item should be a widget object.\n",
-              "items": {
-                "$ref": "#/definitions/widget-item"
               }
             }
           }
         },
-        {
-          "$ref": "#/definitions/include"
+        "head-widgets": {
+          "type": "array",
+          "description": "An array of widgets that will appear above the columns on this page. Each item should be a widget object.\n",
+          "items": {
+            "$ref": "#/definitions/widget-item"
+          }
         }
-      ]
+      }
+    },
+    "page": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/page-item"
+      }
     }
   }
 }
