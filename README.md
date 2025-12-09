@@ -4,11 +4,10 @@
 > [!NOTE]
 > Currently represents version: v0.8.4. Now supports validation of split config files using [`$include`](https://github.com/glanceapp/glance/blob/main/docs/configuration.md?tab=readme-ov-file#including-other-config-files)!
 
-> [!WARNING]
-> Although split config files can now be validated using the new exposed definitions, full schema support for $include is still being ironed out. Expect some errors here and there, even though your config file may be correct!
-
 ## Usage
 The schema is available at: `https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json`
+
+This schema works with any editor that supports JSON schemas. The examples below use VS Code, but similar configuration can be applied to other editors.
 
 ### Main Config File (glance.yml)
 
@@ -19,7 +18,11 @@ For your main `glance.yml` configuration file:
    ```yaml
    # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json
    ```
-3. Done! You'll now get typing completions, hover descriptions, and validation errors.
+3. **Disable YAML validation** to prevent false errors with Glance's custom `$include` syntax. Add this to your VS Code settings:
+   ```json
+   "yaml.validate": false
+   ```
+4. Done. You'll now get typing completions, hover descriptions, and schema-based validation.
 
 ### Split Config Files
 
