@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "schemas/**"
+      - "scripts/generate-schema.py"
+      - "requirements.txt"
   workflow_dispatch:
 
 jobs:
@@ -16,19 +20,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
         with:
-          python-version: "3.13"
-          cache: "pip"
+          enable-cache: true
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Set up Python
+        run: uv python install 3.14
 
       - name: Generate schema
-        run: |
-          cd $GITHUB_WORKSPACE
-          python scripts/generate-schema.py
+        run: uv run scripts/generate-schema.py
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
