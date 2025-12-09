@@ -114,16 +114,22 @@ def main():
         "items": {"$ref": "#/definitions/widget-item"},
     }
 
-    # extract and expose page schema (single page object, NOT an array)
+    # extract and expose page schema (array, matching widget pattern)
     if "pages" in combined_schema["properties"]:
         pages_schema = combined_schema["properties"]["pages"]
         if "items" in pages_schema and isinstance(pages_schema["items"], dict):
-            # extract the page schema as the primary consumer-facing definition
-            # pages are included as single objects, not arrays
-            combined_schema["definitions"]["page"] = pages_schema["items"]
+            # extract the page-item schema (internal use)
+            combined_schema["definitions"]["page-item"] = pages_schema["items"]
             # update pages array to reference the definition
             combined_schema["properties"]["pages"]["items"] = {
-                "$ref": "#/definitions/page"
+                "$ref": "#/definitions/page-item"
+            }
+
+            # create the page definition as an array (primary consumer-facing definition)
+            # pages are always defined as arrays in separate files, even for a single page
+            combined_schema["definitions"]["page"] = {
+                "type": "array",
+                "items": {"$ref": "#/definitions/page-item"},
             }
 
     # update internal widget references to use widget-item

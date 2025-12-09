@@ -18,11 +18,6 @@ For your main `glance.yml` configuration file:
    ```yaml
    # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json
    ```
-3. **Disable YAML validation** to prevent false errors with Glance's custom `$include` syntax. Add this to your VS Code settings:
-   ```json
-   "yaml.validate": false
-   ```
-4. Done. You'll now get typing completions, hover descriptions, and schema-based validation.
 
 ### Split Config Files
 
@@ -57,17 +52,17 @@ For multiple widgets in one file:
 
 #### Page Files
 
-Page files should be **single page objects** (NOT arrays):
+Page files should **also be arrays**, even for a single page:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json#/definitions/page
 
-name: Home
-columns:
-  - size: full
-    widgets:
-      - type: rss
-        title: News
+- name: Home
+  columns:
+    - size: full
+      widgets:
+        - type: rss
+          title: News
 ```
 
 #### Using $include in Your Main Config
@@ -81,15 +76,14 @@ server:
   port: 8080
 
 pages:
-  - $include: pages/home.yml      # Single page object
-  - $include: pages/dashboard.yml # Single page object
+  - $include: pages/home.yml
   - name: Inline Page
     columns:
       - size: full
         widgets:
-          $include: widgets/weather.yml  # Widget array (even if 1 item)
-          $include: widgets/rss.yml      # Widget array
-          - type: clock                  # Inline widget
+          - $include: widgets/weather.yml
+          - $include: widgets/rss.yml
+          - type: clock
 ```
 
 ### Automatic Schema Application for Folders
@@ -111,7 +105,7 @@ Add this to your `.vscode/settings.json`:
 This configuration:
 - Applies the main schema to `glance.yml`
 - Applies the widget schema (array) to all `.yml` files in the `widgets/` folder
-- Applies the page schema (single object) to all `.yml` files in the `pages/` folder
+- Applies the page schema (array) to all `.yml` files in the `pages/` folder
 
 
 ## Known Limitations
