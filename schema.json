@@ -1381,7 +1381,7 @@
               "minItems": 2,
               "description": "A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.",
               "items": {
-                "$ref": "#/definitions/widget"
+                "$ref": "#/definitions/widget-item"
               }
             },
             "type": {
@@ -1927,7 +1927,7 @@
               "items": {
                 "allOf": [
                   {
-                    "$ref": "#/definitions/widget"
+                    "$ref": "#/definitions/widget-item"
                   },
                   {
                     "not": {
@@ -2060,7 +2060,7 @@
         }
       ]
     },
-    "widget": {
+    "widget-item": {
       "oneOf": [
         {
           "allOf": [
@@ -2337,10 +2337,10 @@
         }
       ]
     },
-    "widget-array": {
+    "widget": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/widget"
+        "$ref": "#/definitions/widget-item"
       }
     },
     "page": {
@@ -2408,7 +2408,7 @@
                     "additionalItems": false,
                     "description": "A list of widgets to display in the column.",
                     "items": {
-                      "$ref": "#/definitions/widget"
+                      "$ref": "#/definitions/widget-item"
                     }
                   }
                 }
@@ -2418,7 +2418,7 @@
               "type": "array",
               "description": "An array of widgets that will appear above the columns on this page. Each item should be a widget object.\n",
               "items": {
-                "$ref": "#/definitions/widget"
+                "$ref": "#/definitions/widget-item"
               }
             }
           }
@@ -2427,12 +2427,6 @@
           "$ref": "#/definitions/include"
         }
       ]
-    },
-    "page-array": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/page"
-      }
     }
   }
 }
