@@ -70,6 +70,16 @@ pages:
           - type: clock
 ```
 
+> [!TIP]
+> You can also use `$include` with base config sections (branding, theme, document, server, auth) by using array syntax:
+> ```yaml
+> document:
+>   - $include: config/document.yml
+>
+> theme:
+>   - $include: config/theme.yml
+> ```
+
 ### Automatic Schema Application for Folders
 
 For projects with dedicated folders for widgets and pages, you can configure VS Code to automatically apply the appropriate schema without adding comments to each file.

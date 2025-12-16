@@ -32,7 +32,7 @@ def main():
         with open(yaml_file, "r") as f:
             schema_content = yaml.safe_load(f)
 
-            # add top level headings to the sceyaml
+            # add top level headings to the schema
             for key, value in schema_content.items():
                 combined_schema["properties"][key] = value
 
@@ -79,6 +79,7 @@ def main():
         "type": "object",
         "required": ["$include"],
         "properties": {"$include": {"type": "string"}},
+        "additionalProperties": False,
     }
 
     # create base widget definition
@@ -107,7 +108,7 @@ def main():
     # create the single widget-item definition (internal use)
     combined_schema["definitions"]["widget-item"] = {"oneOf": widget_refs}
 
-    # create the widget definition as an array (primary consumer-facing definition)
+    # create the widget definition as an array (the one to be used by users in their separate files)
     # widgets are always defined as arrays in separate files, even for a single widget
     combined_schema["definitions"]["widget"] = {
         "type": "array",
@@ -125,16 +126,54 @@ def main():
                 "$ref": "#/definitions/page-item"
             }
 
-            # create the page definition as an array (primary consumer-facing definition)
+            # create the page definition as an array (the one to be used by users in their separate files)
             # pages are always defined as arrays in separate files, even for a single page
             combined_schema["definitions"]["page"] = {
                 "type": "array",
                 "items": {"$ref": "#/definitions/page-item"},
             }
 
+    # convert main object sections to support EITHER object OR arrays with $include
+    main_sections = ["branding", "theme", "document", "server", "auth"]
+    for section_name in main_sections:
+        if section_name in combined_schema["properties"]:
+            section_schema = combined_schema["properties"][section_name]
+            if section_schema.get("type") == "object":
+                # create a definition for the section-item (internal use)
+                item_def_name = f"{section_name}-item"
+                section_schema_copy = section_schema.copy()
+                if "additionalProperties" not in section_schema_copy:
+                    section_schema_copy["additionalProperties"] = False
+                combined_schema["definitions"][item_def_name] = section_schema_copy
+
+                # replace the property with oneOf: either the original object OR an array with items/includes
+                combined_schema["properties"][section_name] = {
+                    "oneOf": [
+                        {"$ref": f"#/definitions/{item_def_name}"},
+                        {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {"$ref": f"#/definitions/{item_def_name}"},
+                                    {"$ref": "#/definitions/include"}
+                                ]
+                            }
+                        }
+                    ]
+                }
+
+                combined_schema["definitions"][section_name] = {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {"$ref": f"#/definitions/{item_def_name}"},
+                            {"$ref": "#/definitions/include"}
+                        ]
+                    }
+                }
+
     # update internal widget references to use widget-item
     def update_widget_refs(obj):
-        """Recursively update $ref to widget to use widget-item instead"""
         if isinstance(obj, dict):
             if obj.get("$ref") == "#/definitions/widget":
                 obj["$ref"] = "#/definitions/widget-item"
@@ -186,9 +225,10 @@ def main():
 
     # wrap definitions (except include itself and widget-base which is only used internally)
     for def_name in list(combined_schema["definitions"].keys()):
-        # skip include, widget-base, widget, page, widget-item, and page-item
+        # skip include, widget-base, widget, page, widget-item, page-item, and section-items
         # widget and page are arrays that already have their items wrapped
         # widget-item and page-item are internal definitions that get wrapped when creating widget/page
+        # section-item definitions (branding-item, theme-item, etc.) are already handled with oneOf
         if def_name in (
             "include",
             "widget-base",
@@ -196,7 +236,7 @@ def main():
             "page",
             "widget-item",
             "page-item",
-        ):
+        ) or def_name.endswith("-item"):
             continue
 
         def_schema = combined_schema["definitions"][def_name]
