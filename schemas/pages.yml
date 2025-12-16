@@ -68,11 +68,11 @@ pages:
               additionalItems: false
               description: A list of widgets to display in the column.
               items:
-                $ref: "#/definitions/widget"
+                $ref: "#/definitions/widget-item"
 
       head-widgets:
         type: array
         description: |
           An array of widgets that will appear above the columns on this page. Each item should be a widget object.
         items:
-          $ref: "#/definitions/widget"
+          $ref: "#/definitions/widget-item"

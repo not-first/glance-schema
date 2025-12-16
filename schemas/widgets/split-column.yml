@@ -13,4 +13,4 @@ properties:
     minItems: 2
     description: A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.
     items:
-      $ref: "#/definitions/widget"
+      $ref: "#/definitions/widget-item"

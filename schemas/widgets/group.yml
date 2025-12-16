@@ -13,11 +13,10 @@ properties:
     description: A list of widgets in the same format as on a page column. Accepts any widget apart from a split column or group widget.
     items:
       allOf:
-        - $ref: "#/definitions/widget"
+        - $ref: "#/definitions/widget-item"
         - not:
             properties:
               type:
                 enum:
                   - group
                   - split-column
-

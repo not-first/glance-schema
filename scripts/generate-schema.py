@@ -172,21 +172,6 @@ def main():
                     }
                 }
 
-    # update internal widget references to use widget-item
-    def update_widget_refs(obj):
-        if isinstance(obj, dict):
-            if obj.get("$ref") == "#/definitions/widget":
-                obj["$ref"] = "#/definitions/widget-item"
-            for value in obj.values():
-                update_widget_refs(value)
-        elif isinstance(obj, list):
-            for item in obj:
-                update_widget_refs(item)
-
-    # Apply widget reference updates to properties and definitions
-    update_widget_refs(combined_schema["properties"])
-    update_widget_refs(combined_schema["definitions"])
-
     # inject $include support globally with oneOf wrapping
     def wrap_with_include_support(schema_obj, path=""):
         # base case: if not a dict, return as is
