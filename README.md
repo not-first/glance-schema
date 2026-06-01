@@ -2,7 +2,7 @@
 *A JSON schema detailing the [Glance](https://github.com/glanceapp/glance) config file.*
 
 > [!NOTE]
-> Currently represents version: v0.8.4. Now supports validation of split config files using [`$include`](https://github.com/glanceapp/glance/blob/main/docs/configuration.md?tab=readme-ov-file#including-other-config-files)!
+> Currently represents version: v0.8.5. Now supports validation of split config files using [`$include`](https://github.com/glanceapp/glance/blob/main/docs/configuration.md?tab=readme-ov-file#including-other-config-files)!
 
 ## Usage
 The schema is available at: `https://raw.githubusercontent.com/not-first/glance-schema/master/schema.json`
