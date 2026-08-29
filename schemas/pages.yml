@@ -20,7 +20,7 @@ pages:
         enum:
           - slim
           - wide
-        description: The maximum width of the page on desktop. Default is 1600px, slim is 1100px and wide is 1920px. A slime page can only have 2 columns.
+        description: The maximum width of the page on desktop. Default is 1600px, slim is 1100px and wide is 1920px. A slim page can only have 2 columns.
 
       center-vertically:
         type: boolean
