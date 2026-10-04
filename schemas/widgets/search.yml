@@ -7,6 +7,10 @@ properties:
       - enum:
           - duckduckgo
           - google
+          - bing
+          - perplexity
+          - kagi
+          - startpage
       - type: string
         pattern: .*\{QUERY\}.*
 
